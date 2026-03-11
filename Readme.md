@@ -5,8 +5,8 @@
 - Página de Usuário
 - Página de Admin
 
-  # Tarefas do Banco de Dados(pasta db)
-  - Entidade Usuário
-  - Entidade Categoria
-  - Entidade Produto
-  - Entidade Venda_Produto
+# Tarefas do Banco de Dados(pasta db)
+- Entidade Usuário
+- Entidade Categoria
+- Entidade Produto
+- Entidade Venda_Produto
