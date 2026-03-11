@@ -18,9 +18,19 @@ header{
     background-color: var(--cor1);
     display: flex;
 }
+footer{
+    height: 20%;
+    background-color: var(--cor3);
+}
+h1{
+    color: var(--cor0);
+    font-family: var(--fonte-destaque);
+    font-size: 40px;
+}
 nav{
     font-family: var(--fonte-texto);
     margin-top: 15px;
+    margin-left: 20px;
     padding: 5px;
     height: 85px;
 }
@@ -35,6 +45,9 @@ a{
 a:hover{
     color:#242424;
 }
+#img_logo{
+    width: 100px;
+}
 .img_header{
     width: 70px;
     position:relative;
@@ -47,4 +60,13 @@ a:hover{
     height: 85px;
     margin-left: auto;
   
+}
+#barra_pesquisa{
+    font: (--fonte-texto);
+    font-size: 20px;
+    background-color: rgb(221, 221, 221);
+    border-radius: 5px;
+    padding: 5px;
+    width: 70%;
+    margin: 10px auto 1px auto;
 }
