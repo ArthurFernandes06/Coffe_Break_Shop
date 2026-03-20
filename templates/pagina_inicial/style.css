@@ -8,10 +8,19 @@
     --cor6: rgb(10, 10, 10);
 
     --fonte-texto: 'Arial', sans-serif;
-    --fonte-destaque: 'Times New Roman', serif;
+    --fonte-destaque: 'AlmendraSC', serif;
 }
+
+@font-face {
+    font-family: 'AlmendraSC';
+    src: url(../fontes/AlmendraSC-Regular.ttf);
+}
+
+
 body{
-    background-color: var(--cor4);
+    background-image: url('../imgs/imagem-fundo.jpg');
+    background-size: 100%;
+    background-repeat: repeat;
     margin:0;
 }
 header{
@@ -19,7 +28,7 @@ header{
     display: flex;
 }
 footer{
-    height: 20%;
+    
     background-color: var(--cor3);
 }
 h1{
@@ -63,12 +72,83 @@ a:hover{
     margin-left: auto;
   
 }
-#barra_pesquisa{
-    font: (--fonte-texto);
+
+section{
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    text-shadow: 2px 2px black;
+}
+#texto_main{
+    margin: 30px auto auto auto;
+}
+
+#texto_main p{
+    color: white;
     font-size: 20px;
-    background-color: rgb(221, 221, 221);
-    border-radius: 5px;
+}
+#texto_main h1{
+    font-size: 70px;
+}
+
+
+#div_imgs_section{
+    margin: auto;
     padding: 5px;
-    width: 70%;
-    margin: 10px auto 1px auto;
+    
+}
+
+.img_section_menor{
+    width: 150px;
+    height: 150px;
+    margin: 0;
+    
+}
+.img_section_maior{
+    width: 200px;
+    height: 200px;
+    margin: 0;
+}
+.div_section_menor{
+    width: 200px;
+    height: 200px;
+    padding: 5px;
+    position: relative;
+    
+}
+.div_section_maior{
+    padding: 5px;
+    position: relative;
+}
+#img_alunos{
+    position: absolute;
+    right: 0;
+    top:0;
+    border-style: solid;
+    border-color: var(--cor1);
+    margin:0;
+    padding:0;
+}
+#img_computadores{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    border-style: solid;
+    border-color: var(--cor1);
+    margin:0;
+    padding:0;
+}
+#img_mesa{
+    border-style: solid;
+    border-color: var(--cor1);
+    margin:0;
+    padding:0;
+}
+#img_baralho{
+    border-style: solid;
+    border-color: var(--cor1);
+    position: absolute;
+    top: 0;
+    margin:0;
+    padding:0;
 }
