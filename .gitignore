@@ -1,1 +1,16 @@
-/.vscode
+.vscode/
+
+
+.idea/
+*.iml
+*.iws
+*.ipr
+
+.classpath
+.project
+.settings/
+
+target/
+
+.DS_Store
+Thumbs.db
