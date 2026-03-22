@@ -16,3 +16,8 @@ target/
 Thumbs.db
 postgres_data/
 /bin/
+.metadata/
+.settings/
+.project
+.classpath
+bin/
