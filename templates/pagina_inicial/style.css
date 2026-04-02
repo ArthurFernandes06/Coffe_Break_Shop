@@ -17,11 +17,14 @@
 }
 
 
-body{
-    background-image: url('../imgs/imagem-fundo.jpg');
-    background-size: 100%;
-    background-repeat: repeat;
+html{
     margin:0;
+    padding:0;
+}
+body{
+    background-color: var(--cor5);
+    margin: 0;
+    padding: 0;
 }
 header{
     background-color: var(--cor1);
@@ -73,26 +76,32 @@ a:hover{
   
 }
 
-section{
-    margin: 20px;
-    display: flex;
+section#section_main{
+    padding: 20px;
+    display: grid;
     justify-content: center;
     text-shadow: 2px 2px black;
+    background-image: url('../imgs/imagem-fundo.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    box-shadow: inset 5px 5px 10px black;
 }
-#texto_main{
+section#section_main#texto_main{
     margin: 30px auto auto auto;
 }
 
-#texto_main p{
+div#texto_main p{
     color: white;
     font-size: 20px;
 }
-#texto_main h1{
+div#texto_main h1{
     font-size: 70px;
+    
 }
 
 
-#div_imgs_section{
+section#section_main#div_imgs_section{
     margin: auto;
     padding: 5px;
     
@@ -151,4 +160,24 @@ section{
     top: 0;
     margin:0;
     padding:0;
+}
+.section_ofertas{
+    background-color: var(--cor3);
+    min-height: 500px;
+
+}
+.section_ofertas h2{
+    margin:0;
+    color: var(--cor0);
+}
+section#img_01{
+    background-image: url('../imgs/friends-enjoying-coffee-together.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    box-shadow: inset 5px 5px 10px black;
+}
+section#img_01 h2{
+    color: black;
 }
