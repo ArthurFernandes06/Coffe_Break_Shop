@@ -1,8 +1,7 @@
 # Tarefas do Front(pasta templates)
 - Página Inicial(Arthur)
-- Página de Login
-- Página do Carrinho de compras
-- Página de Usuário
+- Página de Login/Cadastro(Bento)
+- Página de Usuário(Arthur)
 - Página de Admin
 
 # Tarefas do Banco de Dados(pasta db)
