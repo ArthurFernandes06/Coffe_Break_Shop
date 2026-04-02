@@ -1,6 +1,6 @@
 # Tarefas do Front(pasta templates)
 - Página Inicial(Arthur)
-- Página de Login/Cadastro
+- Página de Login/Cadastro(Bento)
 - Página de Usuário(Arthur)
 - Página de Admin
 
