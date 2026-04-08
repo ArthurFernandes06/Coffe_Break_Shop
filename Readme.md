@@ -3,6 +3,7 @@
 - Página de Login/Cadastro(Bento)
 - Página de Usuário(Caio)
 - Página de Admin
+- Página de Produto 
 
 # Tarefas do Banco de Dados(pasta db)
 - Entidade Usuário
