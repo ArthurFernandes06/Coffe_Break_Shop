@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../pagina_inicial/style.css">
+    <link rel="stylesheet" href="./style.css">
     <title>Página do usuário</title>
 </head>
 <body> 
@@ -39,44 +39,45 @@
             </nav>
         </aside>
         
-        <section id="perfil">
+        <section id="perfil" class="pagina">
                 <h2>Meu Perfil:</h2>
                 <form>
                     <p id="exibir-nome">Caio</p>
                     <button id="btn-editar-nome">Editar</button>
-                    <label for="input-nome">Nome</label>
+                    <label for="input-nome" style="display: none">Nome</label>
                     <input type="text" id="input-nome" value="Caio" style="display: none">
                     <button id="btn-salvar-nome" style="display: none">Salvar</button>
 
                     <p id="exibir-sobrenome">Ribeiro</p>
                     <button id="btn-editar-sobrenome">Editar</button>
-                    <label for="input-sobrenome">Sobrenome</label>
+                    <label for="input-sobrenome" style="display: none">Sobrenome</label>
                     <input type="text" id="input-sobrenome" value="Ribeiro" style="display: none">
                     <button id="btn-salvar-sobrenome" style="display: none">Salvar</button>
 
                     <p id="exibir-endereco">Rua G</p>
                     <button id="btn-editar-endereco">Editar</button>
-                    <label for="input-endereco">Endereço</label>
+                    <label for="input-endereco" style="display: none">Endereço</label>
                     <input type="text" id="input-endereco" value="Rua G" style="display: none">
                     <button id="btn-salvar-endereco" style="display: none">Salvar</button>
                 </form>
             </section>
 
-            <section id="atividade">
+            <section id="atividade" class="pagina">
                 <h2>Minha atividade</h2>
                 <!-- Conteúdo: Total de pedidos/Último pedido/Histórico de pedidos/...-->
             </section>
             
-            <section id="carrinho">
+            <section id="carrinho" class="pagina">
                 <h2>Carrinho de compras</h2>
                 <!-- Todo o carrinho de compras e preço total-->
             </section>
 
-            <section id="configuracoes">
+            <section id="configuracoes" class="pagina">
                 <h2>Configurações</h2>
                 <!-- Mudar email/Mudar senha/Notifiicações/Excluir conta-->
             </section>
     </main>
     
+    <script src="script.js"></script>
 </body>
 </html>
