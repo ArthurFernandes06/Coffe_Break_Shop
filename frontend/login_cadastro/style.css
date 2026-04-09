@@ -1,0 +1,389 @@
+/* =============================================
+   VARIABLES & FONT  (mesmas da pagina_inicial)
+   ============================================= */
+:root {
+    --cor0: #CFC6B7;
+    --cor1: #A59376;
+    --cor2: #FAE2BB;
+    --cor3: #7A6543;
+    --cor4: #503D1F;
+    --cor5: #33240B;
+    --cor6: rgb(10, 10, 10);
+
+    --fonte-texto:    'Arial', sans-serif;
+    --fonte-destaque: 'AlmendraSC', serif;
+
+    --radius: 8px;
+    --transition: 0.25s ease;
+}
+
+@font-face {
+    font-family: 'AlmendraSC';
+    src: url('../fontes/AlmendraSC-Regular.ttf');
+}
+
+/* =============================================
+   RESET / BASE
+   ============================================= */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    background-color: var(--cor5);
+    background-image:
+        radial-gradient(ellipse at 20% 50%, rgba(80, 61, 31, 0.6) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, rgba(165, 147, 118, 0.15) 0%, transparent 50%);
+    font-family: var(--fonte-texto);
+    min-height: 100vh;
+}
+
+/* =============================================
+   HEADER  (idêntico ao da pagina_inicial)
+   ============================================= */
+header {
+    background-color: var(--cor1);
+    display: flex;
+    align-items: center;
+    height: 85px;
+    padding: 0 10px;
+}
+
+#img_logo {
+    width: 100px;
+    cursor: pointer;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: auto;
+    font-family: var(--fonte-texto);
+    padding: 5px;
+    height: 85px;
+}
+
+a {
+    text-decoration: none;
+    color: var(--cor6);
+    font-size: 25px;
+    font-family: var(--fonte-texto);
+    padding-left: 20px;
+    white-space: nowrap;
+}
+
+a:hover {
+    color: #242424;
+}
+
+.img_header {
+    width: 55px;
+    position: relative;
+    margin: 8px;
+    cursor: pointer;
+    transition: transform var(--transition), opacity var(--transition);
+}
+
+.img_header:hover {
+    transform: scale(1.1);
+    opacity: 0.85;
+}
+
+#div_imgs_menu {
+    display: flex;
+    align-items: center;
+    width: 170px;
+    height: 85px;
+    margin-left: auto;
+}
+
+/* =============================================
+   MAIN / LAYOUT
+   ============================================= */
+main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 85px);
+    padding: 40px 16px;
+}
+
+/* =============================================
+   AUTH CARD
+   ============================================= */
+#auth-wrapper {
+    width: 100%;
+    max-width: 480px;
+}
+
+#auth-card {
+    background: linear-gradient(145deg, var(--cor3) 0%, var(--cor4) 100%);
+    border: 1px solid var(--cor1);
+    border-radius: 16px;
+    padding: 36px 40px 40px;
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(207, 198, 183, 0.18);
+}
+
+/* Logo inside card */
+#card-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 28px;
+}
+
+#card-logo img {
+    width: 88px;
+    background: radial-gradient(circle, var(--cor2) 0%, var(--cor0) 70%, transparent 100%);
+    border-radius: 50%;
+    padding: 10px;
+    filter: drop-shadow(0 3px 8px rgba(0,0,0,0.5));
+    margin-bottom: 10px;
+}
+
+#card-logo h1 {
+    font-family: var(--fonte-destaque);
+    font-size: 24px;
+    color: var(--cor2);
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+    text-align: center;
+}
+
+/* =============================================
+   TABS
+   ============================================= */
+#tabs {
+    display: flex;
+    border-bottom: 2px solid var(--cor3);
+    margin-bottom: 28px;
+}
+
+.tab-btn {
+    flex: 1;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    padding: 10px 0;
+    font-family: var(--fonte-destaque);
+    font-size: 17px;
+    color: var(--cor0);
+    opacity: 0.5;
+    cursor: pointer;
+    transition: opacity var(--transition), border-color var(--transition), color var(--transition);
+    letter-spacing: 0.5px;
+}
+
+.tab-btn:hover {
+    opacity: 0.8;
+}
+
+.tab-btn.active {
+    opacity: 1;
+    color: var(--cor2);
+    border-bottom-color: var(--cor2);
+}
+
+/* =============================================
+   FORMS
+   ============================================= */
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.auth-form.hidden {
+    display: none;
+}
+
+/* Input group */
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.input-group label {
+    font-size: 13px;
+    font-weight: bold;
+    color: var(--cor0);
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+}
+
+.input-group input {
+    background-color: rgba(255, 255, 255, 0.10);
+    border: 1px solid var(--cor1);
+    border-radius: var(--radius);
+    padding: 11px 14px;
+    color: var(--cor2);
+    font-size: 15px;
+    font-family: var(--fonte-texto);
+    outline: none;
+    transition: border-color var(--transition), background-color var(--transition), box-shadow var(--transition);
+}
+
+.input-group input::placeholder {
+    color: rgba(207, 198, 183, 0.55);
+}
+
+.input-group input:focus {
+    border-color: var(--cor2);
+    background-color: rgba(250, 226, 187, 0.13);
+    box-shadow: 0 0 0 3px rgba(250, 226, 187, 0.18);
+}
+
+/* Input with eye icon */
+.input-with-icon {
+    position: relative;
+}
+
+.input-with-icon input {
+    width: 100%;
+    padding-right: 44px;
+}
+
+.toggle-pw {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 17px;
+    opacity: 0.5;
+    transition: opacity var(--transition);
+    line-height: 1;
+    padding: 2px;
+}
+
+.toggle-pw:hover {
+    opacity: 0.9;
+}
+
+/* Input side-by-side (número + complemento) */
+.input-row {
+    display: flex;
+    gap: 12px;
+}
+
+.input-row .input-group {
+    flex: 1;
+}
+
+/* =============================================
+   FIELDSET — ENDEREÇO
+   ============================================= */
+#fieldset-endereco {
+    border: 1px solid var(--cor3);
+    border-radius: var(--radius);
+    padding: 16px 16px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    width: 100%;
+    min-width: 0;          /* anula o min-width:min-content padrão do fieldset */
+    box-sizing: border-box;
+}
+
+.input-row .input-group {
+    min-width: 0;          /* impede que os inputs filhos estourem o flex container */
+}
+
+.input-row .input-group input {
+    width: 100%;
+}
+
+#fieldset-endereco legend {
+    font-family: var(--fonte-destaque);
+    font-size: 14px;
+    color: var(--cor2);
+    padding: 0 6px;
+    letter-spacing: 0.5px;
+}
+
+/* (login-options removido — usuário sempre fica logado) */
+
+/* =============================================
+   PRIMARY BUTTON
+   ============================================= */
+.btn-primary {
+    background: linear-gradient(135deg, var(--cor3) 0%, var(--cor1) 100%);
+    color: var(--cor5);
+    border: none;
+    border-radius: var(--radius);
+    padding: 13px;
+    font-family: var(--fonte-destaque);
+    font-size: 18px;
+    letter-spacing: 0.8px;
+    cursor: pointer;
+    margin-top: 4px;
+    transition: filter var(--transition), transform var(--transition), box-shadow var(--transition);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+.btn-primary:hover {
+    filter: brightness(1.12);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+    filter: brightness(0.95);
+}
+
+/* =============================================
+   FORM FOOTER
+   ============================================= */
+.form-footer {
+    text-align: center;
+    color: var(--cor0);
+    font-size: 13px;
+    opacity: 0.8;
+}
+
+.link-btn {
+    background: none;
+    border: none;
+    color: var(--cor2);
+    font-size: 13px;
+    cursor: pointer;
+    text-decoration: underline;
+    font-family: var(--fonte-texto);
+    padding: 0;
+    margin: 0;
+}
+
+.link-btn:hover {
+    color: var(--cor0);
+}
+
+/* =============================================
+   RESPONSIVIDADE
+   ============================================= */
+@media (max-width: 520px) {
+    #auth-card {
+        padding: 28px 20px 32px;
+    }
+
+    nav a {
+        font-size: 18px;
+        padding-left: 12px;
+    }
+
+    .input-row {
+        flex-direction: column;
+    }
+}

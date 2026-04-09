@@ -1,0 +1,84 @@
+/**
+ * login_cadastro/script.js
+ * ─────────────────────────────────────────────
+ * Controla as abas (Login / Cadastro) e a
+ * visibilidade das senhas.
+ *
+ * Integração com backend (sugestão):
+ *   - Capture o evento 'submit' de cada form
+ *   - Serialize os campos com FormData
+ *   - Faça fetch() para os endpoints da API
+ */
+
+/* ─── Alternância de abas ─── */
+function switchTab(tab) {
+    const formLogin    = document.getElementById('form-login');
+    const formCadastro = document.getElementById('form-cadastro');
+    const btnLogin     = document.getElementById('tab-login');
+    const btnCadastro  = document.getElementById('tab-cadastro');
+
+    if (tab === 'login') {
+        formLogin.classList.remove('hidden');
+        formCadastro.classList.add('hidden');
+        btnLogin.classList.add('active');
+        btnCadastro.classList.remove('active');
+    } else {
+        formCadastro.classList.remove('hidden');
+        formLogin.classList.add('hidden');
+        btnCadastro.classList.add('active');
+        btnLogin.classList.remove('active');
+    }
+}
+
+/* ─── Mostrar / ocultar senha ─── */
+function togglePw(inputId, btn) {
+    const input = document.getElementById(inputId);
+    if (input.type === 'password') {
+        input.type = 'text';
+        btn.style.opacity = '1';
+    } else {
+        input.type = 'password';
+        btn.style.opacity = '0.5';
+    }
+}
+
+/* ─── Leitura da aba via query-string (?tab=cadastro) ─── */
+document.addEventListener('DOMContentLoaded', () => {
+    const params = new URLSearchParams(window.location.search);
+    const tabParam = params.get('tab');
+    if (tabParam === 'cadastro') {
+        switchTab('cadastro');
+    }
+});
+
+/* ─── Submissão dos formulários ─────────────────────────
+   Aqui você poderá integrar com o backend:
+   substitua o alert() por fetch() para a sua API.
+   ─────────────────────────────────────────────────────── */
+document.getElementById('form-login').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const data = {
+        email: document.getElementById('login-email').value,
+        senha: document.getElementById('login-senha').value,
+    };
+    console.log('[Login] payload:', data);
+    // TODO: fetch('/api/auth/login', { method: 'POST', body: JSON.stringify(data), headers: { 'Content-Type': 'application/json' } })
+    alert('Login recebido! (integração com backend pendente)');
+});
+
+document.getElementById('form-cadastro').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const data = {
+        username:     document.getElementById('cad-username').value,
+        email:        document.getElementById('cad-email').value,
+        senha:        document.getElementById('cad-senha').value,
+        endereco: {
+            rua:          document.getElementById('cad-rua').value,
+            numero:       document.getElementById('cad-numero').value,
+            complemento:  document.getElementById('cad-complemento').value,
+        }
+    };
+    console.log('[Cadastro] payload:', data);
+    // TODO: fetch('/api/auth/register', { method: 'POST', body: JSON.stringify(data), headers: { 'Content-Type': 'application/json' } })
+    alert('Cadastro recebido! (integração com backend pendente)');
+});
