@@ -43,22 +43,25 @@
                 <h2>Meu Perfil:</h2>
                 <form>
                     <p id="exibir-nome">Caio</p>
-                    <button id="btn-editar-nome">Editar</button>
+                    <button id="btn-editar-nome" data-campo="nome" class="editar">Editar</button>
+
                     <label for="input-nome" style="display: none">Nome</label>
-                    <input type="text" id="input-nome" value="Caio" style="display: none">
-                    <button id="btn-salvar-nome" style="display: none">Salvar</button>
+                    <input type="text" id="input-nome" style="display: none" placeholder="Insira novo nome:">
+                    <button id="btn-salvar-nome" data-campo="nome" class="salvar" style="display: none">Salvar</button>
 
                     <p id="exibir-sobrenome">Ribeiro</p>
-                    <button id="btn-editar-sobrenome">Editar</button>
+                    <button id="btn-editar-sobrenome" data-campo="sobrenome" class="editar">Editar</button>
+
                     <label for="input-sobrenome" style="display: none">Sobrenome</label>
-                    <input type="text" id="input-sobrenome" value="Ribeiro" style="display: none">
-                    <button id="btn-salvar-sobrenome" style="display: none">Salvar</button>
+                    <input type="text" id="input-sobrenome" style="display: none" placeholder="Insira novo sobrenome:">
+                    <button id="btn-salvar-sobrenome" data-campo="sobrenome" class="salvar" style="display: none">Salvar</button>
 
                     <p id="exibir-endereco">Rua G</p>
-                    <button id="btn-editar-endereco">Editar</button>
+                    <button id="btn-editar-endereco" data-campo="endereco" class="editar">Editar</button>
+
                     <label for="input-endereco" style="display: none">Endereço</label>
-                    <input type="text" id="input-endereco" value="Rua G" style="display: none">
-                    <button id="btn-salvar-endereco" style="display: none">Salvar</button>
+                    <input type="text" id="input-endereco" style="display: none" placeholder="Insira novo endereço:">
+                    <button id="btn-salvar-endereco" data-campo="endereco" class="salvar" style="display: none">Salvar</button>
                 </form>
             </section>
 
