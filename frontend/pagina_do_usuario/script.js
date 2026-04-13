@@ -49,3 +49,27 @@ btnSave.forEach(btn => {
         btn.style.display = "none"
     })
 })
+
+const pedidos = [
+  { produto: "Café Especial", data: "10/04/2025", status: "entregue", valor: 49.90 },
+  { produto: "Xícara", data: "05/04/2025", status: "enviado", valor: 29.90 }
+]
+
+document.getElementById("total-pedidos").innerHTML = pedidos.length
+ultimoPedido = document.getElementById("ultimo-pedido")
+
+ultimoPedido.innerHTML = pedidos[pedidos.length - 1].produto
+
+const tbody = document.getElementById("historico-pedidos")
+
+pedidos.forEach(pedido => {
+  const linha = document.createElement("tr")
+  linha.innerHTML = `
+    <td>${pedido.produto}</td>
+    <td>${pedido.data}</td>
+    <td>${pedido.status}</td>
+    <td>R$ ${pedido.valor}</td>
+  `
+  tbody.appendChild(linha)
+})
+
