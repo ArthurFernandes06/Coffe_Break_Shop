@@ -56,8 +56,8 @@ const pedidos = [
 ]
 
 document.getElementById("total-pedidos").innerHTML = pedidos.length
-ultimoPedido = document.getElementById("ultimo-pedido")
 
+const ultimoPedido = document.getElementById("ultimo-pedido")
 ultimoPedido.innerHTML = pedidos[pedidos.length - 1].produto
 
 const tbody = document.getElementById("historico-pedidos")
@@ -73,3 +73,30 @@ pedidos.forEach(pedido => {
   tbody.appendChild(linha)
 })
 
+const carrinho = [
+  { produto: "Café", valor: 2.00 },
+  { produto: "Coxinha", valor: 15.90 }
+]
+
+let preco_total = 0;
+
+const precoTotal = document.getElementById("preco-total")
+const itensCarrinho = document.getElementById("itens-carrinho")
+
+carrinho.forEach(produto => {
+
+    const linha = document.createElement("p")
+    linha.innerHTML = `
+    Produto: ${produto.produto} | Preço: ${produto.valor.toFixed(2)}
+    `
+
+    itensCarrinho.appendChild(linha)
+    preco_total += produto.valor;
+    precoTotal.innerHTML = `Preço total: R$${preco_total.toFixed(2)}`
+})
+
+const btnFinalizar = document.getElementById("btn-finalizar")
+btnFinalizar.addEventListener("click", () => {
+    precoTotal.innerHTML = `Preço total: R$ 0,00`
+    itensCarrinho.innerHTML = 'Carrinho vazio...';
+})
