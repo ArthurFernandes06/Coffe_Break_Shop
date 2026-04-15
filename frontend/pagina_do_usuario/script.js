@@ -34,17 +34,23 @@ btnSave.forEach(btn => {
     btn.addEventListener("click", (event) => {
         const clickedbtn = event.target.dataset.campo
 
-        const input = document.getElementById(`input-${clickedbtn}`)
+        const input = document.getElementById(`input-${clickedbtn}`)    
         const label = document.querySelector(`label[for="input-${clickedbtn}"]`)
         const valor = input.value 
+
+        if (clickedbtn === "email" && !valor.includes("@")) {
+            alert("Insira um email válido!")
+            return
+        }
+
         const btnEditar = document.getElementById(`btn-editar-${clickedbtn}`)
 
         const titulo = document.getElementById(`exibir-${clickedbtn}`)
-        titulo.innerHTML = valor
+        const prefixo = titulo.dataset.prefixo || ""
 
+        titulo.textContent = prefixo + valor
         input.style.display = "none"
         label.style.display = "none"
-
         btnEditar.style.display = "block"
         btn.style.display = "none"
     })
@@ -99,4 +105,8 @@ const btnFinalizar = document.getElementById("btn-finalizar")
 btnFinalizar.addEventListener("click", () => {
     precoTotal.innerHTML = `Preço total: R$ 0,00`
     itensCarrinho.innerHTML = 'Carrinho vazio...';
+})
+
+document.querySelector('[data-section="sair"]').addEventListener("click", () => {
+    window.location.href = "../pagina_inicial/index.html"
 })

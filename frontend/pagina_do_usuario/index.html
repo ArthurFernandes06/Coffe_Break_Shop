@@ -1,117 +1,128 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
-    <title>Página do usuário</title>
-</head>
-<body> 
-    <header>
-        <img id="img_logo" src="../imgs/pagina_inicial/header/xicara-logo.png" alt="Icone logo Coffe Break">
-        <nav>
-            <a href="#">Produtos</a>
-            <a href="#">Categorias</a>
-            <a href="#">Ofertas</a>
-            <a href="#">Sobre Nós</a>
-            
-        </nav>
-        <div id="div_imgs_menu">
-            <img class="img_header" src="../imgs/pagina_inicial/header/carrinho.png" alt="Icone da Sacola">
-            <img class="img_header" src="../imgs/pagina_inicial/header/user.png" alt="Icone User">
-        </div>
-    </header>
-    <main>
-        <!-- <section id="welcome_section">
-            <div id="main_title">
-                <h1>Boas vindas (User)!</h1>
-                <h2>Hora de dar um break do trabalho?</h2>
-            </div>
-        </section>
-         -->
-        <aside>
+    <!DOCTYPE html>
+    <html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./style.css">
+        <title>Página do usuário</title>
+    </head>
+    <body> 
+        <header>
+            <img id="img_logo" src="../imgs/pagina_inicial/header/xicara-logo.png" alt="Icone logo Coffe Break">
             <nav>
-                <a href="#" data-section="perfil">Meu Perfil</a>
-                <a href="#" data-section="atividade">Minha atividade</a>
-                <a href="#" data-section="carrinho">Carrinho de compras</a>
-                <a href="#" data-section="configuracoes">Configurações</a>
-                <a href="#" data-section="sair">Sair</a>    
+                <a href="#">Produtos</a>
+                <a href="#">Categorias</a>
+                <a href="#">Ofertas</a>
+                <a href="#">Sobre Nós</a>
+                
             </nav>
-        </aside>
-        
-        <section id="perfil" class="pagina">
-                <h2>Meu Perfil:</h2>
-                <form>
-                    <p id="exibir-nome">Caio</p>
-                    <button id="btn-editar-nome" data-campo="nome" class="editar">Editar</button>
-
-                    <label for="input-nome" style="display: none">Nome</label>
-                    <input type="text" id="input-nome" style="display: none" placeholder="Insira novo nome:">
-                    <button id="btn-salvar-nome" data-campo="nome" class="salvar" style="display: none">Salvar</button>
-
-                    <p id="exibir-sobrenome">Ribeiro</p>
-                    <button id="btn-editar-sobrenome" data-campo="sobrenome" class="editar">Editar</button>
-
-                    <label for="input-sobrenome" style="display: none">Sobrenome</label>
-                    <input type="text" id="input-sobrenome" style="display: none" placeholder="Insira novo sobrenome:">
-                    <button id="btn-salvar-sobrenome" data-campo="sobrenome" class="salvar" style="display: none">Salvar</button>
-
-                    <p id="exibir-endereco">Rua G</p>
-                    <button id="btn-editar-endereco" data-campo="endereco" class="editar">Editar</button>
-
-                    <label for="input-endereco" style="display: none">Endereço</label>
-                    <input type="text" id="input-endereco" style="display: none" placeholder="Insira novo endereço:">
-                    <button id="btn-salvar-endereco" data-campo="endereco" class="salvar" style="display: none">Salvar</button>
-                </form>
-            </section>
-
-            <section id="atividade" class="pagina">
-                <h2>Minha atividade</h2>
-                <!-- Conteúdo: Total de pedidos/Último pedido/Histórico de pedidos/...-->
-                 <div class ="card">
-                    <h3>Total de pedidos:</h3>
-                    <p id="total-pedidos">0</p>
-                 </div>
-                 <div class="card">
-                    <h3>Último pedido:</h3>
-                    <p id="ultimo-pedido">-</p>
-                 </div>
-                 
-                 <h3>Histórico de pedidos:</h3>
-                 <table>
-                    <thead>
-                        <tr>
-                        <th>Produto</th>
-                        <th>Data</th>
-                        <th>Status</th>
-                        <th>Valor</th>
-                        </tr>
-                    </thead>
-
-                    <tbody id="historico-pedidos">
-                        <!-- Históricos  -->
-                    </tbody>
-                    
-                 </table>
-            </section>
-            
-            <section id="carrinho" class="pagina">
-                <h2>Carrinho de compras</h2>
-                <!-- Todo o carrinho de compras e preço total-->
-                 <div id="itens-carrinho">
-
-                    <!-- Preencher com JS -->
+            <div id="div_imgs_menu">
+                <img class="img_header" src="../imgs/pagina_inicial/header/carrinho.png" alt="Icone da Sacola">
+                <img class="img_header" src="../imgs/pagina_inicial/header/user.png" alt="Icone User">
+            </div>
+        </header>
+        <main>
+            <!-- <section id="welcome_section">
+                <div id="main_title">
+                    <h1>Boas vindas (User)!</h1>
+                    <h2>Hora de dar um break do trabalho?</h2>
                 </div>
-                <p id="preco-total">Preço total: R$ 0,00</p>
-                <button id="btn-finalizar">Finalizar compra</button>
             </section>
+            -->
+            <aside>
+                <nav>
+                    <a href="#" data-section="perfil">Meu Perfil</a>
+                    <a href="#" data-section="atividade">Minha atividade</a>
+                    <a href="#" data-section="carrinho">Carrinho de compras</a>
+                    <a href="#" data-section="configuracoes">Configurações</a>
+                    <a href="#" data-section="sair">Sair</a>    
+                </nav>
+            </aside>
+            
+            <section id="perfil" class="pagina">
+                    <h2>Meu Perfil:</h2>
+                    <form>
+                        <p id="exibir-nome" data-prefixo="Nome: ">Caio</p>
+                        <button id="btn-editar-nome" data-campo="nome" class="editar">Editar</button>
 
-            <section id="configuracoes" class="pagina">
-                <h2>Configurações</h2>
-                <!-- Mudar email/Mudar senha/Notifiicações/Excluir conta-->
-            </section>
-    </main>
-    
-    <script src="script.js"></script>
-</body>
-</html>
+                        <label for="input-nome" style="display: none">Nome</label>
+                        <input type="text" id="input-nome" style="display: none" placeholder="Insira novo nome:">
+                        <button id="btn-salvar-nome" data-campo="nome" class="salvar" style="display: none">Salvar</button>
+
+                        <p id="exibir-sobrenome" data-prefixo="Sobrenome: ">Ribeiro</p>
+                        <button id="btn-editar-sobrenome" data-campo="sobrenome" class="editar">Editar</button>
+
+                        <label for="input-sobrenome" style="display: none">Sobrenome</label>
+                        <input type="text" id="input-sobrenome" style="display: none" placeholder="Insira novo sobrenome:">
+                        <button id="btn-salvar-sobrenome" data-campo="sobrenome" class="salvar" style="display: none">Salvar</button>
+
+                        <p id="exibir-endereco" data-prefixo="Endereço: ">Rua G</p>
+                        <button id="btn-editar-endereco" data-campo="endereco" class="editar">Editar</button>
+
+                        <label for="input-endereco" style="display: none">Endereço</label>
+                        <input type="text" id="input-endereco" style="display: none" placeholder="Insira novo endereço:">
+                        <button id="btn-salvar-endereco" data-campo="endereco" class="salvar" style="display: none">Salvar</button>
+                    </form>
+                </section>
+
+                <section id="atividade" class="pagina">
+                    <h2>Minha atividade</h2>
+                    <!-- Conteúdo: Total de pedidos/Último pedido/Histórico de pedidos/...-->
+                    <div class ="card">
+                        <h3>Total de pedidos:</h3>
+                        <p id="total-pedidos">0</p>
+                    </div>
+                    <div class="card">
+                        <h3>Último pedido:</h3>
+                        <p id="ultimo-pedido">-</p>
+                    </div>
+                    
+                    <h3>Histórico de pedidos:</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                            <th>Produto</th>
+                            <th>Data</th>
+                            <th>Status</th>
+                            <th>Valor</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="historico-pedidos">
+                            <!-- Históricos  -->
+                        </tbody>
+                        
+                    </table>
+                </section>
+                
+                <section id="carrinho" class="pagina">
+                    <h2>Carrinho de compras</h2>
+                    <!-- Todo o carrinho de compras e preço total-->
+                    <div id="itens-carrinho">
+
+                        <!-- Preencher com JS -->
+                    </div>
+                    <p id="preco-total">Preço total: R$ 0,00</p>
+                    <button id="btn-finalizar">Finalizar compra</button>
+                </section>
+
+                <section id="configuracoes" class="pagina">
+                    <h2>Configurações</h2>
+                    <!-- Mudar email/Mudar senha/Notificações/Excluir conta-->
+                    <p id="exibir-email" data-prefixo="Email: ">Email: email@email.com</p>
+                    <label for="input-email" style="display: none">Email: </label>
+                    <input type="email" id="input-email" style="display: none" placeholder="Insira novo email: ">
+                    <button id="btn-editar-email" data-campo="email" class="editar">Editar</button>
+                    <button id="btn-salvar-email" data-campo="email" style="display:none" class="salvar">Salvar</button>
+
+                    <p id="exibir-senha" data-prefixo="Senha: ">Senha: Senha@123</p>
+                    <label for="input-senha" style="display: none">Senha: </label>
+                    <input type="password" id="input-senha" style="display: none" placeholder="Insira nova senha: ">
+                    <button id="btn-editar-senha" data-campo="senha" class="editar">Editar</button>
+                    <button id="btn-salvar-senha" data-campo="senha" style="display: none" class="salvar">Salvar</button>
+                </section>
+        </main>
+        
+        <script src="script.js"></script>
+    </body>
+    </html>

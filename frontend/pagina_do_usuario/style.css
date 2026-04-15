@@ -1,3 +1,144 @@
+main {
+    display: flex;
+    min-height: calc(100vh - 85px);
+}
+
+aside {
+    width: 200px;
+    background-color: var(--cor4);
+    flex-shrink: 0;
+    padding: 20px 0;
+}
+
+aside nav {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+}
+
+aside nav a {
+    color: var(--cor0);
+    padding: 12px 20px;
+    font-size: 16px;
+    border-left: 3px solid transparent;
+    transition: background 0.2s;
+}
+
+aside nav a:hover,
+aside nav a.active {
+    background-color: var(--cor3);
+    color: var(--cor2);
+    border-left: 3px solid var(--cor2);
+}
+
 .pagina {
+    flex: 1;
+    padding: 28px;
+    background-color: var(--cor4);
     display: none;
+}
+
+.pagina h2 {
+    color: var(--cor2);
+    font-family: var(--fonte-destaque);
+    margin-bottom: 20px;
+}
+
+.pagina p,
+.pagina label {
+    color: var(--cor0);
+    font-size: 15px;
+}
+
+.card {
+    background-color: var(--cor3);
+    border: 0.5px solid var(--cor1);
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 12px;
+}
+
+.card h3 {
+    color: var(--cor2);
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    background-color: var(--cor5);
+    border: 1px solid var(--cor1);
+    border-radius: 6px;
+    color: var(--cor0);
+    padding: 8px 12px;
+    font-size: 14px;
+    margin: 6px 0;
+    width: 100%;
+    max-width: 320px;
+}
+
+button.editar {
+    background: transparent;
+    border: 0.5px solid var(--cor1);
+    color: var(--cor0);
+    padding: 4px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    margin-left: 8px;
+}
+
+button.editar:hover {
+    background-color: var(--cor3);
+}
+
+button.salvar {
+    background-color: var(--cor3);
+    border: none;
+    color: var(--cor2);
+    padding: 6px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    margin-left: 8px;
+}
+
+button.salvar:hover {
+    background-color: var(--cor1);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    color: var(--cor0);
+    font-size: 14px;
+}
+
+th {
+    background-color: var(--cor3);
+    color: var(--cor2);
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid var(--cor1);
+}
+
+td {
+    padding: 10px;
+    border-bottom: 0.5px solid var(--cor3);
+}
+
+#btn-finalizar {
+    background-color: var(--cor3);
+    color: var(--cor2);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    margin-top: 12px;
+}
+
+#btn-finalizar:hover {
+    background-color: var(--cor1);
 }
