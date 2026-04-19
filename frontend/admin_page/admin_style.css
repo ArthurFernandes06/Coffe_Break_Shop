@@ -1,0 +1,443 @@
+/* =============================================
+   VARIABLES & FONT  (mesmas da pagina_inicial)
+   ============================================= */
+:root {
+    --cor0: #CFC6B7;
+    --cor1: #A59376;
+    --cor2: #FAE2BB;
+    --cor3: #7A6543;
+    --cor4: #503D1F;
+    --cor5: #33240B;
+    --cor6: rgb(10, 10, 10);
+
+    --fonte-texto:    'Arial', sans-serif;
+    --fonte-destaque: 'AlmendraSC', serif;
+
+    --radius: 8px;
+    --transition: 0.25s ease;
+}
+
+@font-face {
+    font-family: 'AlmendraSC';
+    src: url('../fontes/AlmendraSC-Regular.ttf');
+}
+
+/* =============================================
+   RESET / BASE
+   ============================================= */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--cor5);
+    font-family: var(--fonte-texto);
+    color: var(--cor2);
+    min-height: 100vh;
+}
+
+/* =============================================
+   HEADER
+   ============================================= */
+header {
+    background-color: var(--cor1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 65px;
+    padding: 0 20px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+#header-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#header-logo img {
+    width: 40px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--cor2), var(--cor0));
+    padding: 4px;
+}
+
+#header-logo span {
+    font-family: var(--fonte-destaque);
+    font-size: 18px;
+    color: var(--cor5);
+}
+
+#admin-name {
+    font-size: 14px;
+    color: var(--cor5);
+    opacity: 0.85;
+}
+
+/* =============================================
+   LAYOUT
+   ============================================= */
+#layout {
+    display: flex;
+    min-height: calc(100vh - 65px);
+}
+
+/* =============================================
+   SIDEBAR
+   ============================================= */
+#sidebar {
+    width: 190px;
+    background-color: var(--cor4);
+    border-right: 1px solid var(--cor3);
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0;
+    gap: 4px;
+    flex-shrink: 0;
+}
+
+.nav-btn {
+    background: none;
+    border: none;
+    border-left: 3px solid transparent;
+    padding: 12px 20px;
+    text-align: left;
+    font-size: 14px;
+    font-family: var(--fonte-texto);
+    color: var(--cor0);
+    cursor: pointer;
+    transition: background var(--transition), color var(--transition), border-color var(--transition);
+}
+
+.nav-btn:hover {
+    background: rgba(165, 147, 118, 0.15);
+    color: var(--cor2);
+}
+
+.nav-btn.active {
+    background: rgba(250, 226, 187, 0.1);
+    color: var(--cor2);
+    border-left-color: var(--cor2);
+}
+
+/* =============================================
+   MAIN CONTENT
+   ============================================= */
+#content {
+    flex: 1;
+    padding: 28px;
+    overflow-y: auto;
+}
+
+.page {
+    display: none;
+}
+
+.page.active {
+    display: block;
+}
+
+.page h2 {
+    font-family: var(--fonte-destaque);
+    font-size: 22px;
+    color: var(--cor2);
+    margin-bottom: 20px;
+}
+
+/* =============================================
+   CARDS DE MÉTRICAS
+   ============================================= */
+.cards-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 14px;
+    margin-bottom: 24px;
+}
+
+.info-card {
+    background: linear-gradient(145deg, var(--cor3), var(--cor4));
+    border: 1px solid var(--cor1);
+    border-radius: var(--radius);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.card-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--cor1);
+}
+
+.card-value {
+    font-family: var(--fonte-destaque);
+    font-size: 26px;
+    color: var(--cor2);
+}
+
+/* =============================================
+   TABLE BOX
+   ============================================= */
+.table-box {
+    background: linear-gradient(145deg, var(--cor3), var(--cor4));
+    border: 1px solid var(--cor1);
+    border-radius: var(--radius);
+    padding: 18px;
+    overflow-x: auto;
+}
+
+.table-box h3 {
+    font-family: var(--fonte-destaque);
+    font-size: 15px;
+    color: var(--cor2);
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(165, 147, 118, 0.3);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+th {
+    text-align: left;
+    padding: 8px 10px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--cor1);
+    border-bottom: 1px solid rgba(165, 147, 118, 0.3);
+}
+
+td {
+    padding: 9px 10px;
+    color: var(--cor0);
+    border-bottom: 1px solid rgba(165, 147, 118, 0.1);
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+tr:hover td {
+    background: rgba(165, 147, 118, 0.08);
+}
+
+/* =============================================
+   BADGES DE STATUS
+   ============================================= */
+.badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.badge.ok     { background: rgba(125, 186, 111, 0.2); color: #7dba6f; }
+.badge.pend   { background: rgba(250, 199, 117, 0.2); color: #fac775; }
+.badge.cancel { background: rgba(226, 121, 107, 0.2); color: #e2796b; }
+
+/* =============================================
+   TOPO DAS SEÇÕES (busca + botão)
+   ============================================= */
+.section-top {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+}
+
+.section-top input,
+.section-top select {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--cor3);
+    border-radius: var(--radius);
+    padding: 8px 12px;
+    color: var(--cor2);
+    font-size: 13px;
+    font-family: var(--fonte-texto);
+    outline: none;
+    transition: border-color var(--transition);
+}
+
+.section-top input { width: 220px; }
+
+.section-top input::placeholder { color: rgba(207, 198, 183, 0.5); }
+
+.section-top input:focus,
+.section-top select:focus { border-color: var(--cor1); }
+
+.section-top select option {
+    background: var(--cor4);
+    color: var(--cor2);
+}
+
+/* =============================================
+   FORMULÁRIO NOVO PRODUTO
+   ============================================= */
+.form-box {
+    background: linear-gradient(145deg, var(--cor3), var(--cor4));
+    border: 1px solid var(--cor1);
+    border-radius: var(--radius);
+    padding: 18px;
+    margin-bottom: 16px;
+}
+
+.form-box.hidden {
+    display: none;
+}
+
+.form-box h3 {
+    font-family: var(--fonte-destaque);
+    font-size: 15px;
+    color: var(--cor2);
+    margin-bottom: 14px;
+}
+
+.form-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+}
+
+.input-group {
+    flex: 1;
+    min-width: 140px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.input-group label {
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    color: var(--cor1);
+}
+
+.input-group input,
+.input-group select {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--cor3);
+    border-radius: var(--radius);
+    padding: 9px 12px;
+    color: var(--cor2);
+    font-size: 14px;
+    font-family: var(--fonte-texto);
+    outline: none;
+    transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.input-group input::placeholder { color: rgba(207, 198, 183, 0.5); }
+
+.input-group input:focus,
+.input-group select:focus {
+    border-color: var(--cor2);
+    box-shadow: 0 0 0 3px rgba(250, 226, 187, 0.15);
+}
+
+.input-group select option {
+    background: var(--cor4);
+    color: var(--cor2);
+}
+
+.form-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+/* =============================================
+   BOTÕES
+   ============================================= */
+.btn-primary {
+    background: linear-gradient(135deg, var(--cor3), var(--cor1));
+    color: var(--cor5);
+    border: none;
+    border-radius: var(--radius);
+    padding: 9px 18px;
+    font-family: var(--fonte-destaque);
+    font-size: 14px;
+    cursor: pointer;
+    transition: filter var(--transition), transform var(--transition);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+}
+
+.btn-primary:hover {
+    filter: brightness(1.12);
+    transform: translateY(-1px);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--cor1);
+    border: 1px solid var(--cor3);
+    border-radius: var(--radius);
+    padding: 9px 18px;
+    font-family: var(--fonte-destaque);
+    font-size: 14px;
+    cursor: pointer;
+    transition: background var(--transition), color var(--transition);
+}
+
+.btn-secondary:hover {
+    background: rgba(165, 147, 118, 0.15);
+    color: var(--cor2);
+}
+
+.btn-sm {
+    background: linear-gradient(135deg, var(--cor3), var(--cor1));
+    color: var(--cor5);
+    border: none;
+    border-radius: var(--radius);
+    padding: 4px 12px;
+    font-size: 12px;
+    font-family: var(--fonte-texto);
+    cursor: pointer;
+    transition: filter var(--transition);
+}
+
+.btn-sm:hover {
+    filter: brightness(1.15);
+}
+
+/* =============================================
+   RESPONSIVIDADE
+   ============================================= */
+@media (max-width: 600px) {
+    #sidebar {
+        width: 50px;
+    }
+
+    .nav-btn {
+        font-size: 18px;
+        padding: 12px 0;
+        text-align: center;
+    }
+
+    /* Esconde o texto, mantém só o emoji */
+    .nav-btn {
+        overflow: hidden;
+        white-space: nowrap;
+    }
+
+    #content {
+        padding: 16px;
+    }
+
+    .section-top input {
+        width: 100%;
+    }
+}
