@@ -1,12 +1,7 @@
-# Tarefas do Front(pasta templates)
-- Página Inicial(Arthur)
-- Página de Login/Cadastro(Bento)
-- Página de Usuário(Caio)
-- Página de Admin
-- Página de Produto 
-
-# Tarefas do Banco de Dados(pasta db)
-- Entidade Usuário
-- Entidade Categoria
-- Entidade Produto
-- Entidade Venda_Produto
+#Tarefas dos Models e ModelsDAO
+-Usuario e UsuarioDAO
+-Venda e VendaDAO
+-Produto e ProdutoDAO(Arthur)
+-VendaProduto e VendaProdutoDAO
+-Carrinho e CarrinhoDAO
+-CarrinhoProduto e CarrinhoDAO
