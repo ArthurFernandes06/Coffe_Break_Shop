@@ -13,6 +13,7 @@ public class ConDB {
 
     private Connection conexao;
 
+    //Estabelece a conexão, depois de estanciada a classe esse método tem que ser chamado.
     public boolean setConnection()
     {
         try
@@ -36,10 +37,12 @@ public class ConDB {
 
     }
 
+    //Retorna a conexão, chamado após o setConnection()
     public Connection getConnection()
     {
         return conexao;
     }
+    //Ele vai ser chamado para fechar a conexão com o banco de dados.
     public void closeConnection()
     {
         try
