@@ -6,106 +6,85 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CategoriaDAO {
+
     private Categoria mapearCategoria(ResultSet rs) throws SQLException {
         return new Categoria(rs.getInt("id"), rs.getString("nome"), rs.getString("descricao"));
     }
+
     public List<Categoria> obterTodos() {
         List<Categoria> resultado = new ArrayList<Categoria>();
-        try {
-            Connection conn = Conexao.getConexao();
-            Statement statement = conn.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * from categoria");
-            while (resultSet.next()) {
-                Categoria categoria = new Categoria();
-                categoria.setId(resultSet.getInt("id"));
-                categoria.setNome(resultSet.getString("nome"));
-                categoria.setDescricao(resultSet.getString("descricao"));
-                resultado.add(categoria);
+        String sql = "SELECT * FROM categoria";
+        try (Connection conn = Conexao.getConexao();
+             Statement st = conn.createStatement();
+             ResultSet rs = st.executeQuery(sql)) {
+
+            while (rs.next()) {
+                resultado.add(mapearCategoria(rs));
             }
-            resultSet.close();
-            statement.close();
-            conn.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
-            return null;
         }
         return resultado;
     }
     public Categoria obterPeloId(int id) {
         Categoria categoria = null;
-        try {
-            Connection conn = Conexao.getConexao();
+        String sql = "SELECT * FROM categoria WHERE id = ?";
 
-            PreparedStatement preparedStatement = conn.prepareStatement("SELECT * FROM categoria WHERE id = ?");
-            preparedStatement.setInt(1, id);
+        try (Connection conn = Conexao.getConexao();
+            PreparedStatement ps = conn.prepareStatement(sql)) {
 
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                categoria = new Categoria();
-                categoria.setId(resultSet.getInt("id"));
-                categoria.setNome(resultSet.getString("nome"));
-                categoria.setDescricao(resultSet.getString("descricao"));
+            ps.setInt(1, id);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) return mapearCategoria(rs);
             }
-            resultSet.close();
-            preparedStatement.close();
-            conn.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
-            return null;
         }
-        return categoria;
+        return null;
     }
-    public boolean criarCategoria(String nome, String descricao) {
-        boolean sucesso = false;
-        try {
-            Connection conn = Conexao.getConexao();
+    public boolean criarCategoria(Categoria categoria)  {
+        String sql = "INSERT INTO categoria(nome, descricao) VALUES (?, ?)";
+        try (Connection conn = Conexao.getConexao();
+        PreparedStatement ps = conn.prepareStatement(sql)) {
 
-            PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO categoria (nome, descricao) VALUES (?, ?)");
-            preparedStatement.setString(1, nome);
-            preparedStatement.setString(2, descricao);
+            ps.setString(1, categoria.getNome());
+            ps.setString(2, categoria.getDescricao());
 
-            sucesso = (preparedStatement.executeUpdate() == 1);
-            preparedStatement.close();
-            conn.close();
+            return ps.executeUpdate() == 1;
+
         } catch (SQLException ex) {
+            ex.printStackTrace();
             return false;
         }
-        return sucesso;
     }
 
-    public boolean atualizarCategoria(int id, String nome, String descricao) {
-        boolean sucesso = false;
-        try {
-            Connection conn = Conexao.getConexao();
-            PreparedStatement preparedStatement = conn.prepareStatement("UPDATE categoria set nome = ?, descricao = ? where id = ?");
-            preparedStatement.setString(1, nome);
-            preparedStatement.setString(2, descricao);
-            preparedStatement.setInt(3, id);
+    public boolean atualizarCategoria(Categoria categoria) {
+        String sql = "UPDATE categoria SET nome = ?, descricao = ? WHERE id = ?";
+        try (Connection conn = Conexao.getConexao();
+            PreparedStatement ps = conn.prepareStatement(sql)){
 
-            sucesso = (preparedStatement.executeUpdate() == 1);
+            ps.setString(1, categoria.getNome());
+            ps.setString(2, categoria.getDescricao());
+            ps.setInt(3, categoria.getId());
 
-            preparedStatement.close();
-            conn.close();
+            return ps.executeUpdate() == 1;
         } catch (SQLException ex) {
+            ex.printStackTrace();
             return false;
         }
-        return sucesso;
     }
 
     public boolean removerCategoria(int id) {
-        boolean sucesso = false;
-        try {
-            Connection conn = Conexao.getConexao();
-            PreparedStatement preparedStatement = conn.prepareStatement("DELETE from categoria where id = ?");
-            preparedStatement.setInt(1, id);
+        String sql = "DELETE FROM categoria WHERE id = ?";
+        try (Connection conn = Conexao.getConexao();
+            PreparedStatement ps = conn.prepareStatement(sql)){
 
-            sucesso = (preparedStatement.executeUpdate() == 1);
+            ps.setInt(1, id);
+            return ps.executeUpdate() == 1;
 
-            preparedStatement.close();
-            conn.close();
         } catch (SQLException ex) {
+            ex.printStackTrace();
             return false;
         }
-        return sucesso;
     }
 }
