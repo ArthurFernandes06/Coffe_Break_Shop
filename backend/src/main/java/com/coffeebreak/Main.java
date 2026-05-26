@@ -1,17 +1,18 @@
 package com.coffeebreak;
 
 import Categoria.*;
+import Produto.Produto;
+import Produto.ProdutoDAO;
 import Usuario.*;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class Main {
     public static void main(String args[]) throws SQLException {
-        CategoriaDAO dao = new CategoriaDAO();
-        UsuarioDAO dao2 = new UsuarioDAO();
-        Categoria nova = new Categoria("Teste", "blablabla");
-
-        System.out.println("Criar " + dao2.obterTodos());
+        ProdutoDAO pdao = new ProdutoDAO();
+        List<Produto> r = pdao.obterPorCategoria(2);
+        System.out.println(r);
     }
 
 }
