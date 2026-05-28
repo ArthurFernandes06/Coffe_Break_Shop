@@ -10,9 +10,10 @@ public class Carrinho {
     private Timestamp dataCriacao;
     private Usuario usuario;
 
-    public Carrinho(int id, String status, Usuario usuario) {
+    public Carrinho(int id, String status, Timestamp dataCriacao, Usuario usuario) {
         this.id = id;
         this.status = status;
+        this.dataCriacao = dataCriacao;
         this.usuario = usuario;
     }
     public Carrinho(String status, Usuario usuario) {

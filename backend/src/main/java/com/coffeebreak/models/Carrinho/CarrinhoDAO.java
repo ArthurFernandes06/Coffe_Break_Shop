@@ -12,7 +12,7 @@ public class CarrinhoDAO {
         UsuarioDAO usuarioDAO = new UsuarioDAO();
         Usuario usuario = usuarioDAO.obterPeloId(rs.getInt("id_usuario"));
 
-        return new Carrinho(rs.getInt("id"), rs.getString("status"), usuario);
+        return new Carrinho(rs.getInt("id"), rs.getString("status"), rs.getTimestamp("data_criacao"), usuario);
     }
 
     public boolean criarCarrinho(Carrinho carrinho) {
