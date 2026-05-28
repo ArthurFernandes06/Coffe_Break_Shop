@@ -11,11 +11,13 @@ public class Venda {
     private String status; // PENDENTE, PAGO, ENVIADO, CANCELADO
     private Usuario usuario;
 
-    public Venda(int id, double valorTotal, String status, Usuario usuario) {
+    public Venda(int id, Timestamp dataHora, double valorTotal, String status, Usuario usuario) {
         this.id = id;
+        this.dataHora = dataHora;
         this.valorTotal = valorTotal;
         this.status = status;
         this.usuario = usuario;
+
     }
 
     public Venda(double valorTotal, String status, Usuario usuario) {
