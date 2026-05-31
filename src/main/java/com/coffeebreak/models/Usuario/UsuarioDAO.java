@@ -42,6 +42,19 @@ public class UsuarioDAO {
         }
         return null;
     }
+    public Usuario obterPeloEmail(String email) {
+        String sql = "SELECT id, nome, email, endereco, senha, tipo FROM usuario WHERE email = ?";
+        try (Connection conn = Conexao.getConexao();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, email);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) return mapearUsuario(rs);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
     public boolean criarUsuario(Usuario usuario) {
         String sql = "INSERT INTO usuario(nome, email, endereco, senha, tipo) VALUES (?, ?, ?, ?, ?)";
         try (Connection conn = Conexao.getConexao();
