@@ -1,6 +1,6 @@
-package Produto;
+package com.coffeebreak.models.Produto;
 
-import Categoria.Categoria;
+import com.coffeebreak.models.Categoria.Categoria;
 
 public class Produto {
     private int id;

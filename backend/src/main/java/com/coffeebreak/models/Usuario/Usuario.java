@@ -1,4 +1,4 @@
-package Usuario;
+package com.coffeebreak.models.Usuario;
 
 public class Usuario {
     private int id;

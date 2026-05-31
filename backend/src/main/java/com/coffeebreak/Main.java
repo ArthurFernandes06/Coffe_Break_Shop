@@ -1,9 +1,9 @@
 package com.coffeebreak;
 
-import Categoria.*;
-import Produto.Produto;
-import Produto.ProdutoDAO;
-import Usuario.*;
+import com.coffeebreak.models.Categoria.*;
+import com.coffeebreak.models.Produto.Produto;
+import com.coffeebreak.models.Produto.ProdutoDAO;
+import com.coffeebreak.models.Usuario.*;
 
 import java.sql.SQLException;
 import java.util.List;

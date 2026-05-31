@@ -1,8 +1,8 @@
-package carrinhoproduto;
+package com.coffeebreak.models.carrinhoproduto;
 
-import util.Conexao;
-import Carrinho.*;
-import Produto.*;
+import com.coffeebreak.util.Conexao;
+import com.coffeebreak.models.Carrinho.*;
+import com.coffeebreak.models.Produto.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

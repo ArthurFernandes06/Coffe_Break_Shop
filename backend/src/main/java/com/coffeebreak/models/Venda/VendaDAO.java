@@ -1,6 +1,6 @@
-package Venda;
+package com.coffeebreak.models.Venda;
 
-import Usuario.*;
+import com.coffeebreak.models.Usuario.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import util.Conexao;
+import com.coffeebreak.util.Conexao;
 
 public class VendaDAO {
     private Venda mapearVenda(ResultSet rs) throws SQLException {

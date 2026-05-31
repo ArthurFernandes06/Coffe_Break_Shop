@@ -1,6 +1,6 @@
-package Carrinho;
+package com.coffeebreak.models.Carrinho;
 
-import Usuario.Usuario;
+import com.coffeebreak.models.Usuario.Usuario;
 
 import java.sql.Timestamp;
 

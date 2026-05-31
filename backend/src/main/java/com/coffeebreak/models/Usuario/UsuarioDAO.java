@@ -1,6 +1,6 @@
-package Usuario;
+package com.coffeebreak.models.Usuario;
 
-import util.Conexao;
+import com.coffeebreak.util.Conexao;
 
 import java.sql.*;
 import java.util.ArrayList;

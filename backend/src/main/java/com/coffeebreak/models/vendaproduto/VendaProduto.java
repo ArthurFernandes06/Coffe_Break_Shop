@@ -1,7 +1,7 @@
-package vendaproduto;
+package com.coffeebreak.models.vendaproduto;
 
-import Produto.Produto;
-import Venda.Venda;
+import com.coffeebreak.models.Produto.Produto;
+import com.coffeebreak.models.Venda.Venda;
 
 public class VendaProduto {
     private Venda venda;

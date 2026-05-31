@@ -1,6 +1,6 @@
-package Categoria;
+package com.coffeebreak.models.Categoria;
 
-import util.Conexao;
+import com.coffeebreak.util.Conexao;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

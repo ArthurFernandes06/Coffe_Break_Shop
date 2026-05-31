@@ -1,6 +1,6 @@
-package Venda;
+package com.coffeebreak.models.Venda;
 
-import Usuario.Usuario;
+import com.coffeebreak.models.Usuario.Usuario;
 
 import java.sql.Timestamp;
 

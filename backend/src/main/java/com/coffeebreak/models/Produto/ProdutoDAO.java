@@ -1,11 +1,11 @@
-package Produto;
+package com.coffeebreak.models.Produto;
 
-import Categoria.*;
+import com.coffeebreak.models.Categoria.*;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import util.Conexao;
+import com.coffeebreak.util.Conexao;
 
 public class ProdutoDAO {
 

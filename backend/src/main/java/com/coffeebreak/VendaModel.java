@@ -1,4 +1,4 @@
-package com.coffeebreak.models;
+package com.coffeebreak;
 public class VendaModel {
     
 }

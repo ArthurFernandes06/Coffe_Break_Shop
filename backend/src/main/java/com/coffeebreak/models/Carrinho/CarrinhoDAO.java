@@ -1,11 +1,11 @@
-package Carrinho;
+package com.coffeebreak.models.Carrinho;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import util.Conexao;
-import Usuario.*;
+import com.coffeebreak.util.Conexao;
+import com.coffeebreak.models.Usuario.*;
 
 public class CarrinhoDAO {
     private Carrinho mapearCarrinho(ResultSet rs) throws SQLException {

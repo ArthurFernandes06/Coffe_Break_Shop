@@ -1,7 +1,7 @@
-package carrinhoproduto;
+package com.coffeebreak.models.carrinhoproduto;
 
-import Carrinho.Carrinho;
-import Produto.Produto;
+import com.coffeebreak.models.Carrinho.Carrinho;
+import com.coffeebreak.models.Produto.Produto;
 
 public class CarrinhoProduto {
     private Carrinho carrinho;

@@ -1,4 +1,4 @@
-package Categoria;
+package com.coffeebreak.models.Categoria;
 
 public class Categoria {
     private int id;

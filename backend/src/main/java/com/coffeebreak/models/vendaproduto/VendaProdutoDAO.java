@@ -1,9 +1,9 @@
-package vendaproduto;
+package com.coffeebreak.models.vendaproduto;
 
-import Venda.*;
-import Produto.*;
+import com.coffeebreak.models.Venda.*;
+import com.coffeebreak.models.Produto.*;
 
-import util.Conexao;
+import com.coffeebreak.util.Conexao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
