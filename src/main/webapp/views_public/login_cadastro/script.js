@@ -52,19 +52,4 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-document.getElementById('form-cadastro').addEventListener('submit', function (e) {
-    e.preventDefault();
-    const data = {
-        username:     document.getElementById('cad-username').value,
-        email:        document.getElementById('cad-email').value,
-        senha:        document.getElementById('cad-senha').value,
-        endereco: {
-            rua:          document.getElementById('cad-rua').value,
-            numero:       document.getElementById('cad-numero').value,
-            complemento:  document.getElementById('cad-complemento').value,
-        }
-    };
-    console.log('[Cadastro] payload:', data);
-    // TODO: fetch('/api/auth/register', { method: 'POST', body: JSON.stringify(data), headers: { 'Content-Type': 'application/json' } })
-    alert('Cadastro recebido! (integração com backend pendente)');
-});
+

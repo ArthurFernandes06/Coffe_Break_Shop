@@ -5,8 +5,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <link rel="shortcut icon" href="../imgs/xicara-fav-icon.png" type="image/png">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views_public/login_cadastro/style.css">
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/imgs/xicara-fav-icon.png" type="image/png">
     <title>Coffe Break Shop — Entrar / Cadastrar</title>
 </head>
 <body>
@@ -23,8 +23,8 @@
             <a href="../pagina_inicial/index.html#sobre">Sobre Nós</a>
         </nav>
         <div id="div_imgs_menu">
-            <img class="img_header" src="../imgs/pagina_inicial/header/carrinho.png" alt="Icone da Sacola">
-            <img class="img_header" src="../imgs/pagina_inicial/header/user.png" alt="Icone User">
+            <img class="img_header" src="${pageContext.request.contextPath}/imgs/pagina_inicial/header/carrinho.png" alt="Icone da Sacola">
+            <img class="img_header" src="${pageContext.request.contextPath}/imgs/pagina_inicial/header/user.png" alt="Icone User">
         </div>
     </header>
 
@@ -37,7 +37,7 @@
 
                 <!-- Logo / título do card -->
                 <div id="card-logo">
-                    <img src="../imgs/pagina_inicial/header/xicara-logo.png" alt="Logo Coffe Break">
+                    <img src="${pageContext.request.contextPath}/imgs/pagina_inicial/header/xicara-logo.png" alt="Logo Coffe Break">
                     <h1>Coffe Break Shop</h1>
                 </div>
 
@@ -75,10 +75,10 @@
                 </form>
 
                 <!-- ========== FORMULÁRIO CADASTRO ========== -->
-                <form id="form-cadastro" class="auth-form hidden" action="#" method="POST" novalidate>
+                <form id="form-cadastro" class="auth-form hidden" action="${pageContext.request.contextPath}/cadastro" method="POST" novalidate>
 
                     <div class="input-group">
-                        <label for="cad-username">Nome de usuário</label>
+                        <label for="cad-username">Nome Completo</label>
                         <input type="text" id="cad-username" name="username"
                                placeholder="seu_usuario" required autocomplete="username">
                     </div>
@@ -134,6 +134,6 @@
         </div><!-- /auth-wrapper -->
     </main>
 
-    <script src="script.js"></script>
+    <script src="${pageContext.request.contextPath}/views_public/login_cadastro/script.js"></script>
 </body>
 </html>

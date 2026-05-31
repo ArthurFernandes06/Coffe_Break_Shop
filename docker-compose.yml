@@ -14,6 +14,7 @@ services:
    
  web:
   build: .
+  restart: always
   container_name: coffee_break_app
   ports:
    - "8080:8080"

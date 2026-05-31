@@ -1,4 +1,4 @@
-package com.coffeebreak.controllers.usuario;
+package com.coffeebreak.controllers.Usuario;
 
 public class UserController {
 
