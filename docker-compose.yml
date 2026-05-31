@@ -1,13 +1,26 @@
 services:
-  db:
-    image: postgres:15
-    container_name: coffee-db-container
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=LACB@123
-      - POSTGRES_DB=coffeebreak
-    ports:
-      - "5432:5432"
-    volumes:
-      - ./postgres_data:/var/lib/postgresql/data
-      - ./db/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+ db:
+  image: postgres:15
+  container_name: coffee-db-container
+  environment:
+    - POSTGRES_USER=postgres
+    - POSTGRES_PASSWORD=LACB@123
+    - POSTGRES_DB=coffee_break_db
+  ports:
+    - "5432:5432"
+  volumes:
+   - ./postgres_data:/var/lib/postgresql/data
+   - ./db/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+   
+ web:
+  build: .
+  container_name: coffee_break_app
+  ports:
+   - "8080:8080"
+  environment:
+   - DB_URL=jdbc:postgresql://db:5432/coffee_break_db
+   - DB_USER=postgres
+   - DB_PASSWORD=LACB@123
+  depends_on:
+   - db
+
