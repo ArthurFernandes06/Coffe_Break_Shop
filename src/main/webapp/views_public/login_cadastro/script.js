@@ -51,20 +51,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-/* ─── Submissão dos formulários ─────────────────────────
-   Aqui você poderá integrar com o backend:
-   substitua o alert() por fetch() para a sua API.
-   ─────────────────────────────────────────────────────── */
-document.getElementById('form-login').addEventListener('submit', function (e) {
-    e.preventDefault();
-    const data = {
-        email: document.getElementById('login-email').value,
-        senha: document.getElementById('login-senha').value,
-    };
-    console.log('[Login] payload:', data);
-    // TODO: fetch('/api/auth/login', { method: 'POST', body: JSON.stringify(data), headers: { 'Content-Type': 'application/json' } })
-    alert('Login recebido! (integração com backend pendente)');
-});
 
 document.getElementById('form-cadastro').addEventListener('submit', function (e) {
     e.preventDefault();

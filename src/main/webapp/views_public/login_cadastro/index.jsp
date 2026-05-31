@@ -48,7 +48,7 @@
                 </div>
 
                 <!-- ========== FORMULÁRIO LOGIN ========== -->
-                <form id="form-login" class="auth-form" action="#" method="POST" novalidate>
+                <form id="form-login" class="auth-form" action="${pageContext.request.contextPath}/login" method="POST" novalidate>
 
                     <div class="input-group">
                         <label for="login-email">E-mail</label>

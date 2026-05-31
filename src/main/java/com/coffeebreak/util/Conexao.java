@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class Conexao {
     static String JDBC_DRIVER = "org.postgresql.Driver";
-    static String postgresSQLURL = "jdbc:postgresql://localhost:5432/coffeebreak";
+    static String postgresSQLURL = "jdbc:postgresql://localhost:5432/coffee_break_db";
     static String usuario = "postgres";
     static String senha = "LACB@123";
 
