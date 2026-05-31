@@ -9,7 +9,7 @@ import java.util.List;
 public class UsuarioDAO {
 
     private Usuario mapearUsuario(ResultSet rs) throws SQLException {
-        return new Usuario(rs.getInt("id"), rs.getString("nome"), rs.getString("email"), rs.getString("senha"), rs.getBoolean("tipo"));
+        return new Usuario(rs.getInt("id"), rs.getString("nome"), rs.getString("email"), rs.getString("endereco"), rs.getString("senha"), rs.getBoolean("tipo"));
     }
 
     public List<Usuario> obterTodos() {
@@ -43,13 +43,14 @@ public class UsuarioDAO {
         return null;
     }
     public boolean criarUsuario(Usuario usuario) {
-        String sql = "INSERT INTO usuario(nome, email, senha, tipo) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO usuario(nome, email, endereco, senha, tipo) VALUES (?, ?, ?, ?, ?)";
         try (Connection conn = Conexao.getConexao();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, usuario.getNome());
             ps.setString(2, usuario.getEmail());
-            ps.setString(3, usuario.getSenha());
-            ps.setBoolean(4, usuario.isTipo());
+            ps.setString(3, usuario.getEndereco());
+            ps.setString(4, usuario.getSenha());
+            ps.setBoolean(5, usuario.isTipo());
 
             return ps.executeUpdate() == 1;
 
@@ -60,14 +61,15 @@ public class UsuarioDAO {
     }
 
     public boolean atualizarUsuario(Usuario usuario) {
-        String sql = "UPDATE usuario SET nome = ?, email = ?, senha = ?, tipo = ? WHERE id = ?";
+        String sql = "UPDATE usuario SET nome = ?, email = ?, endereco = ?, senha = ?, tipo = ? WHERE id = ?";
         try (Connection conn = Conexao.getConexao();
             PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, usuario.getNome());
             ps.setString(2, usuario.getEmail());
-            ps.setString(3, usuario.getSenha());
-            ps.setBoolean(4, usuario.isTipo());
-            ps.setInt(5, usuario.getId());
+            ps.setString(3, usuario.getEndereco());
+            ps.setString(4, usuario.getSenha());
+            ps.setBoolean(5, usuario.isTipo());
+            ps.setInt(6, usuario.getId());
 
             return ps.executeUpdate() == 1;
         } catch (SQLException ex) {
