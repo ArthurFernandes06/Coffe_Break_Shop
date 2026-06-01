@@ -40,7 +40,7 @@ public class AtualizarUsuarioServlet extends HttpServlet {
 
         if (!email.contains("@")) {
             request.setAttribute("erro", "E-mail inválido. As alterações não foram salvas.");
-            request.getRequestDispatcher("/views_private/usuario/pagina_usuario.jsp")
+            request.getRequestDispatcher("/views_public/pagina_do_usuario/index.jsp")
                     .forward(request, response);
             return;
         }
@@ -61,7 +61,7 @@ public class AtualizarUsuarioServlet extends HttpServlet {
             request.setAttribute("erro", "Não foi possível atualizar os dados. Tente novamente.");
         }
 
-        request.getRequestDispatcher("/views_private/usuario/pagina_usuario.jsp")
+        request.getRequestDispatcher("/views_public/pagina_do_usuario/index.jsp")
                 .forward(request, response);
     }
 }

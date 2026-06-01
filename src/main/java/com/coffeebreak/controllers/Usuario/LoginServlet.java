@@ -34,7 +34,7 @@ public class LoginServlet extends HttpServlet {
             sessao.setAttribute("usuarioId", usuarioDoBanco.getId());
             response.sendRedirect(request.getContextPath() + "/views_public/pagina_do_usuario/index.jsp");
         } else {
-            response.sendRedirect(request.getContextPath() + "/login.jsp?erro=1");
+            response.sendRedirect(request.getContextPath() + "/views_public/login_cadastro/index.jsp");
         }
     }
 }

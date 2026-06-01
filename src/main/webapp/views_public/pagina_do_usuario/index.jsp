@@ -16,7 +16,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minha Conta – Coffee Break</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views_public/pagina_do_usuario/style.css">
 </head>
 <body>
 
@@ -175,6 +175,6 @@
     </div>
 </div>
 
-<script src="script.js"></script>
+<script src="${pageContext.request.contextPath}/views_public/pagina_do_usuario/script.js"></script>
 </body>
 </html>
