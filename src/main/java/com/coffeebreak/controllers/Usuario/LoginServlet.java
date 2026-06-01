@@ -32,7 +32,7 @@ public class LoginServlet extends HttpServlet {
             HttpSession sessao = request.getSession();
             sessao.setAttribute("usuarioLogado", usuarioDoBanco);
             sessao.setAttribute("usuarioId", usuarioDoBanco.getId());
-            response.sendRedirect(request.getContextPath() + "/index.jsp");
+            response.sendRedirect(request.getContextPath() + "webapp/views_public/pagina_inicial/index.jsp");
         } else {
             response.sendRedirect(request.getContextPath() + "/login.jsp?erro=1");
         }
