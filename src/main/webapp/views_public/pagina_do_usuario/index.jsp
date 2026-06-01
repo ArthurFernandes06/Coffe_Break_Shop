@@ -22,17 +22,17 @@
 
 <header>
     <nav>
-        <img id="img_logo" src="../imagens/logo.png" alt="Logo">
+        <img id="img_logo" src="${pageContext.request.contextPath}/views_public/imgs/pagina_inicial/header/xicara-logo.png" alt="Logo">
         <a href="#">Início</a>
         <a href="#">Cardápio</a>
         <a href="#">Sobre</a>
     </nav>
     <div id="div_imgs_menu">
         <a href="${pageContext.request.contextPath}/carrinho">
-            <img class="img_header" src="../imagens/carrinho.png" alt="Carrinho">
+            <img class="img_header" src="${pageContext.request.contextPath}/views_public/imgs/pagina_inicial/header/carrinho.png" alt="Carrinho">
         </a>
         <a href="${pageContext.request.contextPath}/usuario">
-            <img class="img_header" src="../imagens/usuario.png" alt="Usuário">
+            <img class="img_header" src="${pageContext.request.contextPath}/views_public/imgs/pagina_inicial/header/user.png" alt="Usuário">
         </a>
     </div>
 </header>
