@@ -1,0 +1,183 @@
+/* =============================================
+   VARIABLES & BASE
+   ============================================= */
+:root {
+    --cor0: #CFC6B7;
+    --cor1: #A59376;
+    --cor2: #FAE2BB;
+    --cor3: #7A6543;
+    --cor4: #503D1F;
+    --cor5: #33240B;
+    --cor6: rgb(10, 10, 10);
+    --cor-alerta: #b73e3e;
+
+    --fonte-texto: 'Arial', sans-serif;
+    --fonte-destaque: 'AlmendraSC', serif;
+    --radius: 8px;
+    --transition: 0.25s ease;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #1a1205;
+    font-family: var(--fonte-texto);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.header-admin {
+    background-color: var(--cor5);
+    border-bottom: 2px solid var(--cor3);
+    height: 70px;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+#img_logo {
+    width: 50px;
+}
+
+.admin-badge {
+    color: var(--cor2);
+    font-weight: bold;
+    letter-spacing: 2px;
+    font-size: 14px;
+    border: 1px solid var(--cor2);
+    padding: 4px 10px;
+    border-radius: 4px;
+}
+
+
+main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 16px;
+}
+
+#auth-wrapper {
+    width: 100%;
+    max-width: 480px;
+}
+
+.card-admin {
+    background: linear-gradient(145deg, var(--cor4) 0%, var(--cor5) 100%);
+    border: 1px solid var(--cor3);
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+}
+
+#card-logo h1 {
+    font-family: var(--fonte-destaque);
+    color: var(--cor2);
+    font-size: 26px;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    text-align: center;
+    color: var(--cor0);
+    font-size: 13px;
+    margin-bottom: 30px;
+    opacity: 0.8;
+}
+
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.input-group label {
+    font-size: 12px;
+    color: var(--cor0);
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.input-group input {
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--cor3);
+    border-radius: var(--radius);
+    padding: 12px;
+    color: var(--cor2);
+    width: 100%;
+    outline: none;
+    transition: border-color var(--transition);
+}
+
+.input-group input:focus {
+    border-color: var(--cor2);
+}
+
+/* Input com ícone do olhinho */
+.input-with-icon {
+    position: relative;
+}
+
+.input-with-icon input {
+    padding-right: 40px;
+}
+
+.toggle-pw {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    opacity: 0.5;
+    transition: opacity var(--transition);
+}
+
+.toggle-pw:hover {
+    opacity: 1;
+}
+
+.token-group label {
+    color: var(--cor-alerta);
+}
+.token-group input {
+    border-left: 4px solid var(--cor-alerta);
+}
+
+
+.btn-admin {
+    background: var(--cor2);
+    color: var(--cor5);
+    border: none;
+    border-radius: var(--radius);
+    padding: 14px;
+    font-family: var(--fonte-destaque);
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.btn-admin:hover {
+    background: #fff;
+    transform: translateY(-2px);
+}
