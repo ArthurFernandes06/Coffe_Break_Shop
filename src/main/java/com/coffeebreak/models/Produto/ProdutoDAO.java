@@ -115,4 +115,20 @@ public class ProdutoDAO {
         }
         return resultado;
     }
+
+    public int contarTodos() {
+        String sql = "SELECT COUNT(*) as total FROM produto";
+
+        try (Connection conn = Conexao.getConexao();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("total");
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return 0;
+    }
 }
