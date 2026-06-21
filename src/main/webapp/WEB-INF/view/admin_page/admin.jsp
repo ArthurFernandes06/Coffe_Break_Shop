@@ -1,10 +1,11 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="admin_style.css">
-    <link rel="shortcut icon" href="../imgs/xicara-fav-icon.png" type="image/png">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views_admin/admin_page/admin_style.css">
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/imgs/xicara-fav-icon.png" type="image/png">
     <title>Coffe Break Shop — Admin</title>
 </head>
 <body>
@@ -12,7 +13,7 @@
 <!-- HEADER -->
 <header>
     <div id="header-logo">
-        <img src="../imgs/pagina_inicial/header/xicara-logo.png" alt="Logo Coffe Break">
+        <img src="${pageContext.request.contextPath}/../imgs/pagina_inicial/header/xicara-logo.png" alt="Logo Coffe Break">
         <span>Coffe Break <strong>Admin</strong></span>
     </div>
     <span id="admin-name">👤 Administrador</span>
@@ -186,6 +187,6 @@
     </main>
 </div>
 
-<script src="admin.js"></script>
+<script src="${pageContext.request.contextPath}/views_admin/admin_page//admin.js"></script>
 </body>
 </html>

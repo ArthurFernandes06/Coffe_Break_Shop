@@ -47,7 +47,7 @@
                     <button type="submit" class="btn-primary btn-admin">Entrar no Sistema</button>
 
                     <div style="text-align: center; margin-top: 15px;">
-                        <a href="${pageContext.request.contextPath}/views_admin/cadastro/index.jsp"
+                        <a href="${pageContext.request.contextPath}/views_admin/cadastro_admin/index.jsp"
                            style="color: var(--cor0); font-size: 13px; text-decoration: underline; opacity: 0.7;">
                            Novo colaborador? Cadastre-se aqui
                         </a>
