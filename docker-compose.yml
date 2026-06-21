@@ -24,4 +24,6 @@ services:
    - DB_PASSWORD=LACB@123
   depends_on:
    - db
+  volumes:
+   - ./diretorio-de-uploads-local:/usr/local/tomcat/webapps/ROOT/uploads
 
