@@ -91,4 +91,24 @@ public class VendaDAO {
         }
         return resultado;
     }
+    public List<Venda> listarRecentes(int limite) {
+        List<Venda> resultado = new ArrayList<>();
+        // Ordena pela data_hora decrescente (mais recentes primeiro)
+        String sql = "SELECT * FROM venda ORDER BY data_hora DESC LIMIT ?";
+
+        try (Connection conn = Conexao.getConexao();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, limite);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    resultado.add(mapearVenda(rs));
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return resultado;
+    }
 }
