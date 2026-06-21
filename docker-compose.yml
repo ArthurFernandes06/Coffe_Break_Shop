@@ -25,5 +25,5 @@ services:
   depends_on:
    - db
   volumes:
-   - ./diretorio-de-uploads-local:/usr/local/tomcat/webapps/ROOT/uploads
+   - ./diretorio-de-uploads-local:/var/vols/uploads
 

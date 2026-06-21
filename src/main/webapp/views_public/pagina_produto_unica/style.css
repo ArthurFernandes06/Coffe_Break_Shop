@@ -1,0 +1,49 @@
+main.container-produto{
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+.preco{
+    color: #CFC6B7;
+    font-family: var(--fonte-destaque);
+    font-size: 55px;
+    margin-top: 30px;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.btn-comprar{
+    background-color: rgb(153, 255, 153);
+    height: 80px;
+    width: 160px;
+    border-style: solid;
+    border-color: rgb(119, 190, 119);
+    border-radius: 6px;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.603);
+    font-weight: bolder;
+    margin: auto;
+    padding: 10px;
+}
+
+.btn-comprar:Hover{
+    background-color: rgb(119, 190, 119);
+}
+
+h3, p{
+    color: #CFC6B7;
+}
+
+.informacoes-produto{
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    margin-left:30px;
+    padding: 20px;
+}
+.produto-detalhes{
+    display: flex;
+    justify-content: left;
+    
+}

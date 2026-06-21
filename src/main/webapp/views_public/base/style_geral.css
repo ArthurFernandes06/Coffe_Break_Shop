@@ -39,6 +39,7 @@ h1{
     font-family: var(--fonte-destaque);
     font-size: 40px;
 }
+
 nav{
     display: flex;
     align-items: center;
@@ -62,27 +63,16 @@ a:hover{
 #img_logo{
     width: 100px;
 }
-
-section#section_main{
-    padding: 20px;
-    display: grid;
-    justify-content: center;
-    text-shadow: 2px 2px black;
-    background-image: url('../imgs/pagina_inicial/imagem-fundo.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    box-shadow: inset 5px 5px 10px black;
+.img_header{
+    width: 55px;
+    position:relative;
+    margin:8px;
 }
-section#section_main#texto_main{
-    margin: 30px auto auto auto;
-}
-
-div#texto_main p{
-    color: white;
-    font-size: 20px;
-}
-div#texto_main h1{
-    font-size: 70px;
-    
+#div_imgs_menu{
+    display: flex;
+    align-items: center;
+    width: 170px;
+    height: 85px;
+    margin-left: auto;
+  
 }
