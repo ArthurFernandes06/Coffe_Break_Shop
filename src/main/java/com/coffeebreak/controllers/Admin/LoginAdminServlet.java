@@ -38,7 +38,7 @@ public class LoginAdminServlet extends HttpServlet {
             sessao.setAttribute("adminLogado", usuarioDoBanco);
             sessao.setAttribute("adminId", usuarioDoBanco.getId());
 
-            request.getRequestDispatcher("/WEB-INF/view/admin_page/admin.jsp").forward(request, response);
+            response.sendRedirect(request.getContextPath() + "/admin/dashboard");
 
         } else {
             response.sendRedirect(request.getContextPath() + "/views_admin/login_admin/index.jsp");
