@@ -93,7 +93,6 @@ public class VendaDAO {
     }
     public List<Venda> listarRecentes(int limite) {
         List<Venda> resultado = new ArrayList<>();
-        // Ordena pela data_hora decrescente (mais recentes primeiro)
         String sql = "SELECT * FROM venda ORDER BY data_hora DESC LIMIT ?";
 
         try (Connection conn = Conexao.getConexao();
@@ -110,5 +109,64 @@ public class VendaDAO {
             ex.printStackTrace();
         }
         return resultado;
+    }
+    public List<Venda> listarRecentesComUsuario(int limite) {
+        List<Venda> lista = new ArrayList<>();
+        String sql = "SELECT v.id AS id_venda, v.data_hora, v.valor_total, v.status_pedido, " +
+                "u.id AS id_usuario, u.nome, u.email, u.endereco, u.senha, u.tipo " +
+                "FROM venda v JOIN usuario u ON v.id_usuario = u.id " +
+                "ORDER BY v.data_hora DESC LIMIT ?";
+
+        try (Connection conn = Conexao.getConexao();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, limite);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Usuario u = new Usuario(rs.getInt("id_usuario"), rs.getString("nome"), rs.getString("email"), rs.getString("endereco"), rs.getString("senha"), rs.getBoolean("tipo"));
+                    Venda v = new Venda(rs.getInt("id_venda"), rs.getTimestamp("data_hora"), rs.getDouble("valor_total"), rs.getString("status_pedido"), u);
+                    lista.add(v);
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return lista;
+    }
+
+    public int contarVendasHoje() {
+        String sql = "SELECT COUNT(*) as total FROM venda WHERE DATE(data_hora) = CURRENT_DATE";
+
+        try (Connection conn = Conexao.getConexao();
+            PreparedStatement ps = conn.prepareStatement(sql)) {
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("total");
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return 0;
+    }
+
+    public double calcularReceitaMes() {
+        String sql = "SELECT SUM(valor_total) AS total_receita " +
+                "FROM venda " +
+                "WHERE EXTRACT(MONTH FROM data_hora) = EXTRACT(MONTH FROM CURRENT_DATE) " +
+                "AND EXTRACT(YEAR FROM data_hora) = EXTRACT(YEAR FROM CURRENT_DATE)";
+
+        try (Connection conn = Conexao.getConexao();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getDouble("total_receita");
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return 0.0;
     }
 }
