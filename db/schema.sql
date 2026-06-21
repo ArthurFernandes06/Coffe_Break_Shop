@@ -12,9 +12,9 @@ create table venda (
 	id_usuario int references usuario(id),
 	data_hora timestamptz default current_timestamp,
 	valor_total decimal(10,2),
-	status varchar(30) default 'PENDENTE',
+	status_pedido varchar(30) default 'PENDENTE',
 	
-	constraint CHK_status check (status in (
+	constraint CHK_status check (status_pedido in (
         'PENDENTE', 
         'PAGO',  
         'ENVIADO',  
