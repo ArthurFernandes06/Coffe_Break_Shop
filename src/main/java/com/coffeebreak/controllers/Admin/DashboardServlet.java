@@ -1,5 +1,7 @@
 package com.coffeebreak.controllers.Admin;
 
+import com.coffeebreak.models.Categoria.Categoria;
+import com.coffeebreak.models.Categoria.CategoriaDAO;
 import com.coffeebreak.models.Produto.Produto;
 import com.coffeebreak.models.Produto.ProdutoDAO;
 import com.coffeebreak.models.Usuario.Usuario;
@@ -26,26 +28,26 @@ public class DashboardServlet extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/loginAdmin");
             return;
         }
-
         VendaDAO vendaDAO = new VendaDAO();
         ProdutoDAO produtoDAO = new ProdutoDAO();
         UsuarioDAO usuarioDAO = new UsuarioDAO();
 
-        int totalHoje = vendaDAO.contarVendasHoje();
-        double receitaMes = vendaDAO.calcularReceitaMes();
-        List<Venda> pedidosRecentes = vendaDAO.listarRecentesComUsuario(5);
-        List<Produto> listaProdutos = produtoDAO.obterTodos();
-        List<Usuario> listaUsuarios = usuarioDAO.obterTodos();
+        request.setAttribute("totalHoje", vendaDAO.contarVendasHoje());
+        request.setAttribute("receitaMes", vendaDAO.calcularReceitaMes());
+        request.setAttribute("totalProdutos", produtoDAO.contarTodos());
+        request.setAttribute("totalUsuarios", usuarioDAO.contarTodos());
+        request.setAttribute("pedidosRecentes", vendaDAO.listarRecentesComUsuario(5));
+
+        CategoriaDAO categoriaDAO = new CategoriaDAO();
+        List<Produto> produtos = produtoDAO.obterTodos();
+        List<Categoria> categorias = categoriaDAO.obterTodos();
+        List<Usuario> usuarios = usuarioDAO.obterTodos();
         List<Venda> todasVendas = vendaDAO.obterTodas();
 
-        request.setAttribute("totalHoje", totalHoje);
-        request.setAttribute("receitaMes", receitaMes);
-        request.setAttribute("pedidosRecentes", pedidosRecentes);
-        request.setAttribute("produtos", listaProdutos);
-        request.setAttribute("usuarios", listaUsuarios);
+        request.setAttribute("produtos", produtos);
+        request.setAttribute("categorias", categorias);
+        request.setAttribute("usuarios", usuarios);
         request.setAttribute("todasVendas", todasVendas);
-        request.setAttribute("totalProdutos", listaProdutos.size());
-        request.setAttribute("totalUsuarios", listaUsuarios.size());
 
         request.getRequestDispatcher("/WEB-INF/view/admin_page/admin.jsp").forward(request, response);
     }

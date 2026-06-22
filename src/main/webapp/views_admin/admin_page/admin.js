@@ -48,51 +48,89 @@ function confirmar(btn) {
     // TODO: fetch('/api/pedidos/confirmar', { method: 'PATCH', ... })
 }
 
-/* ─── Salvar novo produto ─── */
-function salvarProduto() {
-    const nome  = document.getElementById('p-nome').value.trim();
-    const preco = document.getElementById('p-preco').value;
-    const cat   = document.getElementById('p-cat').value;
+/* ─── Formulário de produto: abrir em modo "novo" ─── */
+function novoProduto() {
+    const form = document.getElementById('produto-form');
+    form.reset();
+    document.getElementById('p-id').value = '';
+    document.getElementById('p-foto-atual').textContent = '';
+    form.action = form.dataset.cadastrarUrl;
+    document.getElementById('form-produto-titulo').textContent = 'Novo produto';
 
-    if (!nome || !preco) {
-        alert('Preencha o nome e o preço do produto.');
-        return;
+    const box = document.getElementById('form-produto');
+    box.classList.remove('hidden');
+    box.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+/* ─── Formulário de produto: abrir em modo "edição" ─── */
+function editarProduto(btn) {
+    const row = btn.closest('tr');
+    const form = document.getElementById('produto-form');
+
+    document.getElementById('p-id').value        = row.dataset.id;
+    document.getElementById('p-nome').value       = row.dataset.nome;
+    document.getElementById('p-preco').value      = row.dataset.preco;
+    document.getElementById('p-quantidade').value = row.dataset.quantidade;
+    document.getElementById('p-cat').value        = row.dataset.categoria;
+    document.getElementById('p-descricao').value  = row.dataset.descricao || '';
+    document.getElementById('p-foto').value       = '';
+    document.getElementById('p-foto-atual').textContent = row.dataset.foto
+        ? ('Foto atual: ' + row.dataset.foto + ' — envie um novo arquivo apenas se quiser substituí-la.')
+        : 'Este produto ainda não possui foto.';
+
+    form.action = form.dataset.atualizarUrl;
+    document.getElementById('form-produto-titulo').textContent = 'Editar produto';
+
+    const box = document.getElementById('form-produto');
+    box.classList.remove('hidden');
+    box.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+/* ─── Formulário de categoria: abrir em modo "novo" ─── */
+function novaCategoria() {
+    const form = document.getElementById('categoria-form');
+    form.reset();
+    document.getElementById('c-id').value = '';
+    form.action = form.dataset.cadastrarUrl;
+    document.getElementById('form-categoria-titulo').textContent = 'Nova categoria';
+
+    const box = document.getElementById('form-categoria');
+    box.classList.remove('hidden');
+    box.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+/* ─── Formulário de categoria: abrir em modo "edição" ─── */
+function editarCategoria(btn) {
+    const row = btn.closest('tr');
+    const form = document.getElementById('categoria-form');
+
+    document.getElementById('c-id').value = row.dataset.id;
+    document.getElementById('c-nome').value = row.dataset.nome;
+    document.getElementById('c-descricao').value = row.dataset.descricao || '';
+
+    form.action = form.dataset.atualizarUrl;
+    document.getElementById('form-categoria-titulo').textContent = 'Editar categoria';
+
+    const box = document.getElementById('form-categoria');
+    box.classList.remove('hidden');
+    box.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+/* ─── Ao carregar: reabre a aba correta após redirect e limpa os params da URL ─── */
+document.addEventListener('DOMContentLoaded', function () {
+    const params = new URLSearchParams(window.location.search);
+    const secao = params.get('secao');
+
+    if (secao) {
+        const btn = document.querySelector('.nav-btn[data-secao="' + secao + '"]');
+        if (btn) showPage(secao, btn);
     }
 
-    const tbody = document.querySelector('#tb-produtos tbody');
-    const tr = document.createElement('tr');
-    tr.innerHTML = `
-        <td>${nome}</td>
-        <td>${cat}</td>
-        <td>R$ ${parseFloat(preco).toFixed(2).replace('.', ',')}</td>
-        <td><span class="badge ok">Ativo</span></td>
-    `;
-    tbody.appendChild(tr);
-
-    // Limpa o formulário e fecha
-    document.getElementById('p-nome').value  = '';
-    document.getElementById('p-preco').value = '';
-    toggleForm('form-produto');
-
-    // TODO: fetch('/api/produtos', { method: 'POST', body: JSON.stringify({ nome, preco, cat }) })
-}
-
-const modalDeletarAdmin = document.getElementById('modal-deletar-admin');
-const btnAbrirModalDeletarAdmin = document.getElementById('btn-abrir-modal-deletar-admin');
-const btnCancelarDeletarAdmin = document.getElementById('btn-cancelar-deletar-admin');
-
-if (modalDeletarAdmin && btnAbrirModalDeletarAdmin && btnCancelarDeletarAdmin) {
-    btnAbrirModalDeletarAdmin.addEventListener('click', () => {
-        modalDeletarAdmin.style.display = 'flex';
-    });
-
-    btnCancelarDeletarAdmin.addEventListener('click', () => {
-        modalDeletarAdmin.style.display = 'none';
-    });
-
-    modalDeletarAdmin.addEventListener('click', (e) => {
-        if (e.target === modalDeletarAdmin) {
-            modalDeletarAdmin.style.display = 'none';
-        }
-    });
-}
+    if (params.has('sucesso') || params.has('erro')) {
+        const url = new URL(window.location.href);
+        url.searchParams.delete('sucesso');
+        url.searchParams.delete('erro');
+        url.searchParams.delete('secao');
+        window.history.replaceState({}, '', url);
+    }
+});

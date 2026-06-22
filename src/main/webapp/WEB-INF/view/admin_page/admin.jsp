@@ -2,6 +2,7 @@
 
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
+<%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -23,11 +24,12 @@
 
 <div id="layout">
     <nav id="sidebar">
-        <button class="nav-btn active" onclick="showPage('dashboard', this)">📊 Dashboard</button>
-        <button class="nav-btn" onclick="showPage('produtos', this)">☕ Produtos</button>
-        <button class="nav-btn" onclick="showPage('pedidos', this)">🛒 Pedidos</button>
-        <button class="nav-btn" onclick="showPage('usuarios', this)">👥 Usuários</button>
-        <button class="nav-btn" onclick="showPage('perfil-admin', this)">👤 Meus dados</button>
+        <button class="nav-btn active" data-secao="dashboard" onclick="showPage('dashboard', this)">📊 Dashboard</button>
+        <button class="nav-btn" data-secao="produtos" onclick="showPage('produtos', this)">☕ Produtos</button>
+        <button class="nav-btn" data-secao="categorias" onclick="showPage('categorias', this)">🏷️ Categorias</button>
+        <button class="nav-btn" data-secao="pedidos" onclick="showPage('pedidos', this)">🛒 Pedidos</button>
+        <button class="nav-btn" data-secao="usuarios" onclick="showPage('usuarios', this)">👥 Usuários</button>
+        <button class="nav-btn" data-secao="perfil-admin" onclick="showPage('perfil-admin', this)">👤 Meus dados</button>
         <button class="nav-btn" onclick="window.location.href='${pageContext.request.contextPath}/admin/logout'">🚪 Sair</button>
     </nav>
 
@@ -87,54 +89,194 @@
 
         <section id="page-produtos" class="page">
             <h2>Produtos</h2>
+
+            <c:if test="${not empty param.sucesso}">
+                <div class="alert alert-success">${fn:escapeXml(param.sucesso)}</div>
+            </c:if>
+            <c:if test="${not empty param.erro}">
+                <div class="alert alert-error">${fn:escapeXml(param.erro)}</div>
+            </c:if>
+
             <div class="section-top">
                 <input type="text" id="busca-produto" placeholder="Buscar produto..." oninput="filtrar('busca-produto', 'tb-produtos', 0)">
-                <button class="btn-primary" onclick="toggleForm('form-produto')">+ Novo produto</button>
+                <button class="btn-primary" type="button" onclick="novoProduto()">+ Novo produto</button>
             </div>
+
             <div id="form-produto" class="form-box hidden">
-                <h3>Novo produto</h3>
-                <div class="form-row">
-                    <div class="input-group">
-                        <label for="p-nome">Nome</label>
-                        <input type="text" id="p-nome" placeholder="Nome do produto">
+                <h3 id="form-produto-titulo">Novo produto</h3>
+                <form id="produto-form" method="POST"
+                      action="${pageContext.request.contextPath}/admin/produto/cadastrar"
+                      enctype="multipart/form-data"
+                      data-cadastrar-url="${pageContext.request.contextPath}/admin/produto/cadastrar"
+                      data-atualizar-url="${pageContext.request.contextPath}/admin/produto/atualizar">
+
+                    <input type="hidden" name="id" id="p-id" value="">
+
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label for="p-nome">Nome</label>
+                            <input type="text" id="p-nome" name="nome" placeholder="Ex: Café com leite" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="p-preco">Preço (R$)</label>
+                            <input type="number" id="p-preco" name="preco" step="0.01" min="0" placeholder="0,00" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="p-quantidade">Estoque</label>
+                            <input type="number" id="p-quantidade" name="quantidade" min="0" value="0">
+                        </div>
                     </div>
-                    <div class="input-group">
-                        <label for="p-preco">Preço</label>
-                        <input type="number" id="p-preco" min="0" step="0.01" placeholder="0,00">
+
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label for="p-cat">Categoria</label>
+                            <select id="p-cat" name="id_categoria" required>
+                                <option value="">Selecione...</option>
+                                <c:forEach var="cat" items="${categorias}">
+                                    <option value="${cat.id}">${fn:escapeXml(cat.nome)}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="p-foto">Foto do produto</label>
+                            <input type="file" id="p-foto" name="foto" accept="image/*">
+                            <span id="p-foto-atual" class="foto-atual-hint"></span>
+                        </div>
                     </div>
-                    <div class="input-group">
-                        <label for="p-cat">Categoria</label>
-                        <select id="p-cat">
-                            <option>Café</option>
-                            <option>Doce</option>
-                            <option>Salgado</option>
-                            <option>Bebida</option>
-                        </select>
+
+                    <div class="form-row">
+                        <div class="input-group" style="flex-basis: 100%;">
+                            <label for="p-descricao">Descrição</label>
+                            <input type="text" id="p-descricao" name="descricao" placeholder="Breve descrição do produto">
+                        </div>
                     </div>
-                </div>
-                <div class="form-actions">
-                    <button type="button" class="btn-secondary" onclick="toggleForm('form-produto')">Cancelar</button>
-                    <button type="button" class="btn-primary" onclick="salvarProduto()">Salvar produto</button>
-                </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" onclick="toggleForm('form-produto')">Cancelar</button>
+                        <button type="submit" class="btn-primary">Salvar</button>
+                    </div>
+                </form>
             </div>
+
+            <c:if test="${empty categorias}">
+                <div class="alert alert-error">
+                    Nenhuma categoria cadastrada ainda. Cadastre ao menos uma categoria antes de criar produtos.
+                </div>
+            </c:if>
+
             <div class="table-box">
                 <table id="tb-produtos">
                     <thead>
-                        <tr><th>Nome</th><th>Categoria</th><th>Preço</th><th>Status</th></tr>
+                        <tr><th>Nome</th><th>Categoria</th><th>Preço</th><th>Status</th><th>Ações</th></tr>
                     </thead>
                     <tbody>
                         <c:forEach var="p" items="${produtos}">
-                            <tr>
-                                <td>${p.nome}</td>
-                                <td>${p.categoria.nome}</td>
+                            <tr
+                                data-id="${p.id}"
+                                data-nome="${fn:escapeXml(p.nome)}"
+                                data-preco="${p.preco}"
+                                data-quantidade="${p.quantidade}"
+                                data-categoria="${p.categoria.id}"
+                                data-descricao="${fn:escapeXml(empty p.descricao ? '' : p.descricao)}"
+                                data-foto="${fn:escapeXml(empty p.foto ? '' : p.foto)}">
+                                <td>${fn:escapeXml(p.nome)}</td>
+                                <td>${fn:escapeXml(p.categoria.nome)}</td>
                                 <td><fmt:formatNumber value="${p.preco}" type="currency" currencySymbol="R$" /></td>
                                 <td>
                                     <span class="badge ${p.quantidade > 0 ? 'ok' : 'cancel'}">
                                         ${p.quantidade > 0 ? 'Ativo' : 'Esgotado'}
                                     </span>
                                 </td>
+                                <td>
+                                    <div class="acoes-cell">
+                                        <button type="button" class="btn-sm" onclick="editarProduto(this)">Editar</button>
+                                        <form method="POST" action="${pageContext.request.contextPath}/admin/produto/remover"
+                                              onsubmit="return confirm('Tem certeza que deseja remover este produto?');">
+                                            <input type="hidden" name="id" value="${p.id}">
+                                            <button type="submit" class="btn-sm btn-danger">Excluir</button>
+                                        </form>
+                                    </div>
+                                </td>
                             </tr>
                         </c:forEach>
+                        <c:if test="${empty produtos}">
+                            <tr><td colspan="5">Nenhum produto cadastrado ainda.</td></tr>
+                        </c:if>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="page-categorias" class="page">
+            <h2>Categorias</h2>
+
+            <c:if test="${not empty param.sucesso}">
+                <div class="alert alert-success">${fn:escapeXml(param.sucesso)}</div>
+            </c:if>
+            <c:if test="${not empty param.erro}">
+                <div class="alert alert-error">${fn:escapeXml(param.erro)}</div>
+            </c:if>
+
+            <div class="section-top">
+                <input type="text" id="busca-categoria" placeholder="Buscar categoria..." oninput="filtrar('busca-categoria', 'tb-categorias', 0)">
+                <button class="btn-primary" type="button" onclick="novaCategoria()">+ Nova categoria</button>
+            </div>
+
+            <div id="form-categoria" class="form-box hidden">
+                <h3 id="form-categoria-titulo">Nova categoria</h3>
+                <form id="categoria-form" method="POST"
+                      action="${pageContext.request.contextPath}/admin/categoria/cadastrar"
+                      data-cadastrar-url="${pageContext.request.contextPath}/admin/categoria/cadastrar"
+                      data-atualizar-url="${pageContext.request.contextPath}/admin/categoria/atualizar">
+
+                    <input type="hidden" name="id" id="c-id" value="">
+
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label for="c-nome">Nome</label>
+                            <input type="text" id="c-nome" name="nome" placeholder="Ex: Cafés" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="c-descricao">Descrição</label>
+                            <input type="text" id="c-descricao" name="descricao" placeholder="Breve descrição da categoria">
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" onclick="toggleForm('form-categoria')">Cancelar</button>
+                        <button type="submit" class="btn-primary">Salvar</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="table-box">
+                <table id="tb-categorias">
+                    <thead>
+                        <tr><th>Nome</th><th>Descrição</th><th>Ações</th></tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach var="cat" items="${categorias}">
+                            <tr
+                                data-id="${cat.id}"
+                                data-nome="${fn:escapeXml(cat.nome)}"
+                                data-descricao="${fn:escapeXml(empty cat.descricao ? '' : cat.descricao)}">
+                                <td>${fn:escapeXml(cat.nome)}</td>
+                                <td>${fn:escapeXml(empty cat.descricao ? '-' : cat.descricao)}</td>
+                                <td>
+                                    <div class="acoes-cell">
+                                        <button type="button" class="btn-sm" onclick="editarCategoria(this)">Editar</button>
+                                        <form method="POST" action="${pageContext.request.contextPath}/admin/categoria/remover"
+                                              onsubmit="return confirm('Tem certeza que deseja remover esta categoria?');">
+                                            <input type="hidden" name="id" value="${cat.id}">
+                                            <button type="submit" class="btn-sm btn-danger">Excluir</button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                        <c:if test="${empty categorias}">
+                            <tr><td colspan="3">Nenhuma categoria cadastrada ainda.</td></tr>
+                        </c:if>
                     </tbody>
                 </table>
             </div>

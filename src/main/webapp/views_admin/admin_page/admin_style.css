@@ -456,6 +456,34 @@ tr:hover td {
     filter: brightness(1.15);
 }
 
+/* Coluna de ações na tabela de produtos */
+.acoes-cell {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+
+.acoes-cell form {
+    margin: 0;
+}
+
+.btn-sm.btn-danger {
+    background: linear-gradient(135deg, #7a3d33, #e2796b);
+    color: #fff;
+}
+
+.btn-sm.btn-danger:hover {
+    filter: brightness(1.1);
+}
+
+/* Dica de foto atual no formulário de edição */
+.foto-atual-hint {
+    display: block;
+    font-size: 11px;
+    color: var(--cor1);
+    margin-top: 4px;
+}
+
 .btn-deletar {
     display: inline-flex;
     align-items: center;
