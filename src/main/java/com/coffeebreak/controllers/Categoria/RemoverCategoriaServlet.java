@@ -1,6 +1,6 @@
-package com.coffeebreak.controllers.Produto;
+package com.coffeebreak.controllers.Categoria;
 
-import com.coffeebreak.models.Produto.ProdutoDAO;
+import com.coffeebreak.models.Categoria.CategoriaDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -13,8 +13,8 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
 
-@WebServlet("/admin/produto/remover")
-public class RemoverProdutoServlet extends HttpServlet {
+@WebServlet("/admin/categoria/remover")
+public class RemoverCategoriaServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -32,22 +32,22 @@ public class RemoverProdutoServlet extends HttpServlet {
 
         try {
             int id = Integer.parseInt(idStr);
-            ProdutoDAO produtoDAO = new ProdutoDAO();
-            boolean removido = produtoDAO.removerProduto(id);
+            CategoriaDAO categoriaDAO = new CategoriaDAO();
+            boolean removida = categoriaDAO.removerCategoria(id);
 
-            if (removido) {
+            if (removida) {
                 chave = "sucesso";
-                mensagem = "Produto removido com sucesso!";
+                mensagem = "Categoria removida com sucesso!";
             } else {
                 chave = "erro";
-                mensagem = "Não foi possível remover o produto. Ele pode estar vinculado a pedidos existentes.";
+                mensagem = "Não foi possível remover a categoria. Ela pode estar vinculada a produtos existentes.";
             }
         } catch (NumberFormatException e) {
             chave = "erro";
-            mensagem = "Produto inválido.";
+            mensagem = "Categoria inválida.";
         }
 
-        String url = request.getContextPath() + "/admin/dashboard?secao=produtos&" + chave
+        String url = request.getContextPath() + "/admin/dashboard?secao=categorias&" + chave
                 + "=" + URLEncoder.encode(mensagem, StandardCharsets.UTF_8);
         response.sendRedirect(url);
     }

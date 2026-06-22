@@ -86,6 +86,36 @@ function editarProduto(btn) {
     box.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
+/* ─── Formulário de categoria: abrir em modo "novo" ─── */
+function novaCategoria() {
+    const form = document.getElementById('categoria-form');
+    form.reset();
+    document.getElementById('c-id').value = '';
+    form.action = form.dataset.cadastrarUrl;
+    document.getElementById('form-categoria-titulo').textContent = 'Nova categoria';
+
+    const box = document.getElementById('form-categoria');
+    box.classList.remove('hidden');
+    box.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+/* ─── Formulário de categoria: abrir em modo "edição" ─── */
+function editarCategoria(btn) {
+    const row = btn.closest('tr');
+    const form = document.getElementById('categoria-form');
+
+    document.getElementById('c-id').value = row.dataset.id;
+    document.getElementById('c-nome').value = row.dataset.nome;
+    document.getElementById('c-descricao').value = row.dataset.descricao || '';
+
+    form.action = form.dataset.atualizarUrl;
+    document.getElementById('form-categoria-titulo').textContent = 'Editar categoria';
+
+    const box = document.getElementById('form-categoria');
+    box.classList.remove('hidden');
+    box.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
 /* ─── Ao carregar: reabre a aba correta após redirect e limpa os params da URL ─── */
 document.addEventListener('DOMContentLoaded', function () {
     const params = new URLSearchParams(window.location.search);

@@ -18,12 +18,7 @@ import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
-/**
- * Servlet responsável por atualizar um produto existente.
- * Campos em branco mantêm o valor atual do produto (mesma lógica usada em
- * AtualizarUsuarioServlet). Uma nova foto só substitui a atual se for enviada.
- * Acesso restrito ao administrador logado (sessão "adminLogado").
- */
+
 @WebServlet("/admin/produto/atualizar")
 @MultipartConfig(maxFileSize = 5 * 1024 * 1024) // 5MB
 public class AtualizarProdutoServlet extends HttpServlet {

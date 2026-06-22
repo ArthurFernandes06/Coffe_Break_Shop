@@ -18,10 +18,7 @@ import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
-/**
- * Servlet responsável por cadastrar um novo produto.
- * Acesso restrito ao administrador logado (sessão "adminLogado").
- */
+
 @WebServlet("/admin/produto/cadastrar")
 @MultipartConfig(maxFileSize = 5 * 1024 * 1024) // 5MB
 public class CadastroProdutoServlet extends HttpServlet {

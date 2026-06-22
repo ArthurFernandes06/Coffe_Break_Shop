@@ -26,6 +26,7 @@
     <nav id="sidebar">
         <button class="nav-btn active" data-secao="dashboard" onclick="showPage('dashboard', this)">📊 Dashboard</button>
         <button class="nav-btn" data-secao="produtos" onclick="showPage('produtos', this)">☕ Produtos</button>
+        <button class="nav-btn" data-secao="categorias" onclick="showPage('categorias', this)">🏷️ Categorias</button>
         <button class="nav-btn" data-secao="pedidos" onclick="showPage('pedidos', this)">🛒 Pedidos</button>
         <button class="nav-btn" data-secao="usuarios" onclick="showPage('usuarios', this)">👥 Usuários</button>
         <button class="nav-btn" data-secao="perfil-admin" onclick="showPage('perfil-admin', this)">👤 Meus dados</button>
@@ -200,6 +201,81 @@
                         </c:forEach>
                         <c:if test="${empty produtos}">
                             <tr><td colspan="5">Nenhum produto cadastrado ainda.</td></tr>
+                        </c:if>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="page-categorias" class="page">
+            <h2>Categorias</h2>
+
+            <c:if test="${not empty param.sucesso}">
+                <div class="alert alert-success">${fn:escapeXml(param.sucesso)}</div>
+            </c:if>
+            <c:if test="${not empty param.erro}">
+                <div class="alert alert-error">${fn:escapeXml(param.erro)}</div>
+            </c:if>
+
+            <div class="section-top">
+                <input type="text" id="busca-categoria" placeholder="Buscar categoria..." oninput="filtrar('busca-categoria', 'tb-categorias', 0)">
+                <button class="btn-primary" type="button" onclick="novaCategoria()">+ Nova categoria</button>
+            </div>
+
+            <div id="form-categoria" class="form-box hidden">
+                <h3 id="form-categoria-titulo">Nova categoria</h3>
+                <form id="categoria-form" method="POST"
+                      action="${pageContext.request.contextPath}/admin/categoria/cadastrar"
+                      data-cadastrar-url="${pageContext.request.contextPath}/admin/categoria/cadastrar"
+                      data-atualizar-url="${pageContext.request.contextPath}/admin/categoria/atualizar">
+
+                    <input type="hidden" name="id" id="c-id" value="">
+
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label for="c-nome">Nome</label>
+                            <input type="text" id="c-nome" name="nome" placeholder="Ex: Cafés" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="c-descricao">Descrição</label>
+                            <input type="text" id="c-descricao" name="descricao" placeholder="Breve descrição da categoria">
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" onclick="toggleForm('form-categoria')">Cancelar</button>
+                        <button type="submit" class="btn-primary">Salvar</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="table-box">
+                <table id="tb-categorias">
+                    <thead>
+                        <tr><th>Nome</th><th>Descrição</th><th>Ações</th></tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach var="cat" items="${categorias}">
+                            <tr
+                                data-id="${cat.id}"
+                                data-nome="${fn:escapeXml(cat.nome)}"
+                                data-descricao="${fn:escapeXml(empty cat.descricao ? '' : cat.descricao)}">
+                                <td>${fn:escapeXml(cat.nome)}</td>
+                                <td>${fn:escapeXml(empty cat.descricao ? '-' : cat.descricao)}</td>
+                                <td>
+                                    <div class="acoes-cell">
+                                        <button type="button" class="btn-sm" onclick="editarCategoria(this)">Editar</button>
+                                        <form method="POST" action="${pageContext.request.contextPath}/admin/categoria/remover"
+                                              onsubmit="return confirm('Tem certeza que deseja remover esta categoria?');">
+                                            <input type="hidden" name="id" value="${cat.id}">
+                                            <button type="submit" class="btn-sm btn-danger">Excluir</button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                        <c:if test="${empty categorias}">
+                            <tr><td colspan="3">Nenhuma categoria cadastrada ainda.</td></tr>
                         </c:if>
                     </tbody>
                 </table>

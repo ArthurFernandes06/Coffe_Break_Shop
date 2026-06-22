@@ -31,25 +31,23 @@ public class DashboardServlet extends HttpServlet {
         VendaDAO vendaDAO = new VendaDAO();
         ProdutoDAO produtoDAO = new ProdutoDAO();
         UsuarioDAO usuarioDAO = new UsuarioDAO();
-        // Buscando os dados
-        int totalHoje = vendaDAO.contarVendasHoje();
-        double receitaMes = vendaDAO.calcularReceitaMes();
-        List<Venda> pedidosRecentes = vendaDAO.listarRecentesComUsuario(5);
 
-        // Enviando para o JSP
-        // Dentro do seu DashboardServlet.java
         request.setAttribute("totalHoje", vendaDAO.contarVendasHoje());
         request.setAttribute("receitaMes", vendaDAO.calcularReceitaMes());
-        request.setAttribute("totalProdutos", produtoDAO.contarTodos()); // Apenas o número
-        request.setAttribute("totalUsuarios", usuarioDAO.contarTodos()); // Apenas o número
+        request.setAttribute("totalProdutos", produtoDAO.contarTodos());
+        request.setAttribute("totalUsuarios", usuarioDAO.contarTodos());
         request.setAttribute("pedidosRecentes", vendaDAO.listarRecentesComUsuario(5));
 
-        // Dados para a aba de Produtos (listagem + formulário de cadastro/edição)
         CategoriaDAO categoriaDAO = new CategoriaDAO();
         List<Produto> produtos = produtoDAO.obterTodos();
         List<Categoria> categorias = categoriaDAO.obterTodos();
+        List<Usuario> usuarios = usuarioDAO.obterTodos();
+        List<Venda> todasVendas = vendaDAO.obterTodas();
+
         request.setAttribute("produtos", produtos);
         request.setAttribute("categorias", categorias);
+        request.setAttribute("usuarios", usuarios);
+        request.setAttribute("todasVendas", todasVendas);
 
         request.getRequestDispatcher("/WEB-INF/view/admin_page/admin.jsp").forward(request, response);
     }
