@@ -1,5 +1,6 @@
 package com.coffeebreak.controllers.Produto;
 
+import com.coffeebreak.util.UploadUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -12,12 +13,12 @@ import java.nio.file.Files;
 @WebServlet("/uploads/*")
 public class ImageServlet extends HttpServlet {
 
-    private static final String UPLOAD_DIR = "/var/vols/uploads";
+    private static final String UPLOAD_DIR = UploadUtil.UPLOAD_DIR;
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         String requestedImage = request.getPathInfo();
 
         if (requestedImage == null) {
