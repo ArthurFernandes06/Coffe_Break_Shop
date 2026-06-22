@@ -15,15 +15,12 @@ public class LogoffAdminServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // Busca a sessão atual sem criar uma nova sessão caso o admin já esteja deslogado.
         HttpSession sessao = request.getSession(false);
 
-        // Encerra a sessão para remover os dados do admin logado do servidor.
         if (sessao != null) {
             sessao.invalidate();
         }
 
-        // Depois do logout, envia o admin de volta para a tela de login administrativo.
         response.sendRedirect(request.getContextPath() + "/loginAdmin");
     }
 
@@ -31,7 +28,6 @@ public class LogoffAdminServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // Permite que o logout funcione tanto por GET quanto por POST, reaproveitando a mesma lógica.
         doGet(request, response);
     }
 }
