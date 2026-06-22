@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/views_admin/admin_page/admin_style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views_admin/admin_page/admin_style.css?v=perfil-admin-2">
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/imgs/xicara-fav-icon.png" type="image/png">
     <title>Coffe Break Shop — Admin</title>
 </head>
@@ -18,7 +18,7 @@
         <img src="${pageContext.request.contextPath}/../imgs/pagina_inicial/header/xicara-logo.png" alt="Logo Coffe Break">
         <span>Coffe Break <strong>Admin</strong></span>
     </div>
-    <span id="admin-name">👤 Administrador</span>
+    <span id="admin-name">👤 ${sessionScope.adminLogado.nome}</span>
 </header>
 
 <div id="layout">
@@ -27,9 +27,23 @@
         <button class="nav-btn" onclick="showPage('produtos', this)">☕ Produtos</button>
         <button class="nav-btn" onclick="showPage('pedidos', this)">🛒 Pedidos</button>
         <button class="nav-btn" onclick="showPage('usuarios', this)">👥 Usuários</button>
+        <button class="nav-btn" onclick="showPage('perfil-admin', this)">👤 Meus dados</button>
+        <button class="nav-btn" onclick="window.location.href='${pageContext.request.contextPath}/admin/logout'">🚪 Sair</button>
     </nav>
 
     <main id="content">
+        <c:if test="${param.sucesso == 'dadosAtualizados'}">
+            <div class="alert alert-success">Dados atualizados com sucesso.</div>
+        </c:if>
+        <c:if test="${param.erro == 'emailInvalido'}">
+            <div class="alert alert-error">E-mail inválido. As alterações não foram salvas.</div>
+        </c:if>
+        <c:if test="${param.erro == 'atualizacao'}">
+            <div class="alert alert-error">Não foi possível atualizar os dados. Tente novamente.</div>
+        </c:if>
+        <c:if test="${param.erro == 'remocao'}">
+            <div class="alert alert-error">Não foi possível remover a conta. Tente novamente.</div>
+        </c:if>
 
         <section id="page-dashboard" class="page active">
             <h2>Dashboard</h2>
@@ -76,6 +90,32 @@
             <div class="section-top">
                 <input type="text" id="busca-produto" placeholder="Buscar produto..." oninput="filtrar('busca-produto', 'tb-produtos', 0)">
                 <button class="btn-primary" onclick="toggleForm('form-produto')">+ Novo produto</button>
+            </div>
+            <div id="form-produto" class="form-box hidden">
+                <h3>Novo produto</h3>
+                <div class="form-row">
+                    <div class="input-group">
+                        <label for="p-nome">Nome</label>
+                        <input type="text" id="p-nome" placeholder="Nome do produto">
+                    </div>
+                    <div class="input-group">
+                        <label for="p-preco">Preço</label>
+                        <input type="number" id="p-preco" min="0" step="0.01" placeholder="0,00">
+                    </div>
+                    <div class="input-group">
+                        <label for="p-cat">Categoria</label>
+                        <select id="p-cat">
+                            <option>Café</option>
+                            <option>Doce</option>
+                            <option>Salgado</option>
+                            <option>Bebida</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="toggleForm('form-produto')">Cancelar</button>
+                    <button type="button" class="btn-primary" onclick="salvarProduto()">Salvar produto</button>
+                </div>
             </div>
             <div class="table-box">
                 <table id="tb-produtos">
@@ -142,9 +182,81 @@
             </div>
         </section>
 
+        <section id="page-perfil-admin" class="page">
+            <h2>Meus Dados</h2>
+
+            <div class="account-grid">
+                <form class="form-box account-panel" action="${pageContext.request.contextPath}/admin/atualizar" method="post">
+                    <h3>Dados pessoais</h3>
+
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label for="admin-perfil-nome">Nome</label>
+                            <input type="text" id="admin-perfil-nome" name="nome" value="${sessionScope.adminLogado.nome}" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="admin-perfil-email">E-mail</label>
+                            <input type="email" id="admin-perfil-email" name="email" value="${sessionScope.adminLogado.email}" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label for="admin-perfil-endereco">Endereço</label>
+                            <input type="text" id="admin-perfil-endereco" name="endereco" value="${sessionScope.adminLogado.endereco}">
+                        </div>
+                        <div class="input-group">
+                            <label for="admin-perfil-senha">Nova senha</label>
+                            <input type="password" id="admin-perfil-senha" name="senha" placeholder="Deixe em branco para manter a atual">
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary">Salvar alterações</button>
+                    </div>
+                </form>
+
+                <div class="form-box account-panel danger-panel">
+                    <h3>Excluir cadastro</h3>
+                    <p>Ao confirmar, seu acesso administrativo será encerrado e o cadastro será removido.</p>
+                    <div class="form-actions">
+                        <button type="button" class="btn-deletar" id="btn-abrir-modal-deletar-admin" onclick="abrirModalDeletarAdmin()">Excluir meu cadastro</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
 </div>
 
-<script src="${pageContext.request.contextPath}/views_admin/admin_page/admin.js"></script>
+<div id="modal-deletar-admin" class="modal-overlay" style="display:none;" onclick="fecharModalDeletarAdminFora(event)">
+    <div class="modal-box">
+        <h3>⚠️ Confirmar exclusão</h3>
+        <p>Tem certeza que deseja excluir seu cadastro? Esta ação é <strong>irreversível</strong>.</p>
+        <div class="modal-acoes">
+            <button type="button" id="btn-cancelar-deletar-admin" class="btn-secondary" onclick="fecharModalDeletarAdmin()">Cancelar</button>
+            <form action="${pageContext.request.contextPath}/admin/remover" method="post">
+                <button type="submit" class="btn-deletar">Sim, excluir</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function abrirModalDeletarAdmin() {
+        document.getElementById('modal-deletar-admin').style.display = 'flex';
+    }
+
+    function fecharModalDeletarAdmin() {
+        document.getElementById('modal-deletar-admin').style.display = 'none';
+    }
+
+    function fecharModalDeletarAdminFora(event) {
+        if (event.target.id === 'modal-deletar-admin') {
+            fecharModalDeletarAdmin();
+        }
+    }
+</script>
+<script src="${pageContext.request.contextPath}/views_admin/admin_page/admin.js?v=perfil-admin-2"></script>
 </body>
 </html>

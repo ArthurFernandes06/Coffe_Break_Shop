@@ -359,6 +359,49 @@ tr:hover td {
     justify-content: flex-end;
 }
 
+.alert {
+    border-radius: var(--radius);
+    padding: 11px 14px;
+    margin-bottom: 18px;
+    font-size: 13px;
+    font-weight: bold;
+    border: 1px solid transparent;
+}
+
+.alert-success {
+    background: rgba(125, 186, 111, 0.16);
+    border-color: rgba(125, 186, 111, 0.42);
+    color: #a8d79d;
+}
+
+.alert-error {
+    background: rgba(226, 121, 107, 0.16);
+    border-color: rgba(226, 121, 107, 0.42);
+    color: #f0a197;
+}
+
+.account-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(260px, 1fr);
+    gap: 16px;
+    align-items: start;
+}
+
+.account-panel {
+    margin-bottom: 0;
+}
+
+.danger-panel {
+    border-color: rgba(226, 121, 107, 0.55);
+}
+
+.danger-panel p {
+    color: var(--cor0);
+    font-size: 13px;
+    line-height: 1.5;
+    margin-bottom: 18px;
+}
+
 /* =============================================
    BOTÕES
    ============================================= */
@@ -413,6 +456,81 @@ tr:hover td {
     filter: brightness(1.15);
 }
 
+.btn-deletar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #8b2020;
+    color: #ffd0d0;
+    border: none;
+    border-radius: var(--radius);
+    min-height: 38px;
+    padding: 8px 18px;
+    font-family: var(--fonte-texto);
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color var(--transition), transform var(--transition);
+}
+
+.btn-deletar:hover {
+    background-color: #b03030;
+    transform: translateY(-1px);
+}
+
+.danger-panel .btn-deletar,
+.modal-acoes .btn-deletar {
+    background-color: #8b2020 !important;
+    color: #ffd0d0 !important;
+}
+
+.danger-panel .btn-deletar:hover,
+.modal-acoes .btn-deletar:hover {
+    background-color: #b03030 !important;
+}
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+}
+
+.modal-box {
+    background: var(--cor4);
+    border: 1px solid var(--cor1);
+    border-radius: 12px;
+    padding: 28px;
+    max-width: 420px;
+    width: 100%;
+    color: var(--cor0);
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.45);
+}
+
+.modal-box h3 {
+    color: var(--cor2);
+    margin-bottom: 12px;
+    font-family: var(--fonte-destaque);
+    font-size: 18px;
+}
+
+.modal-box p {
+    margin-bottom: 20px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.modal-acoes {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+}
+
 /* =============================================
    RESPONSIVIDADE
    ============================================= */
@@ -439,5 +557,9 @@ tr:hover td {
 
     .section-top input {
         width: 100%;
+    }
+
+    .account-grid {
+        grid-template-columns: 1fr;
     }
 }

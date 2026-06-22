@@ -16,7 +16,10 @@ function showPage(id, btn) {
 
 /* ─── Mostra / esconde formulário ─── */
 function toggleForm(id) {
-    document.getElementById(id).classList.toggle('hidden');
+    const form = document.getElementById(id);
+    if (form) {
+        form.classList.toggle('hidden');
+    }
 }
 
 /* ─── Filtro de tabela por coluna ─── */
@@ -72,4 +75,24 @@ function salvarProduto() {
     toggleForm('form-produto');
 
     // TODO: fetch('/api/produtos', { method: 'POST', body: JSON.stringify({ nome, preco, cat }) })
+}
+
+const modalDeletarAdmin = document.getElementById('modal-deletar-admin');
+const btnAbrirModalDeletarAdmin = document.getElementById('btn-abrir-modal-deletar-admin');
+const btnCancelarDeletarAdmin = document.getElementById('btn-cancelar-deletar-admin');
+
+if (modalDeletarAdmin && btnAbrirModalDeletarAdmin && btnCancelarDeletarAdmin) {
+    btnAbrirModalDeletarAdmin.addEventListener('click', () => {
+        modalDeletarAdmin.style.display = 'flex';
+    });
+
+    btnCancelarDeletarAdmin.addEventListener('click', () => {
+        modalDeletarAdmin.style.display = 'none';
+    });
+
+    modalDeletarAdmin.addEventListener('click', (e) => {
+        if (e.target === modalDeletarAdmin) {
+            modalDeletarAdmin.style.display = 'none';
+        }
+    });
 }
