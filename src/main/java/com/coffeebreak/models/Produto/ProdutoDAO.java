@@ -34,6 +34,22 @@ public class ProdutoDAO {
         return resultado;
     }
 
+    public List<Produto> obterEmEstoque() {
+        List<Produto> resultado = new ArrayList<Produto>();
+        String sql = "SELECT * FROM produto WHERE quantidade > 0 ORDER BY nome";
+
+        try (Connection conn = Conexao.getConexao();
+             Statement st = conn.createStatement();
+             ResultSet rs = st.executeQuery(sql)) {
+            while (rs.next()) {
+                resultado.add(mapearProduto(rs));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return resultado;
+    }
+
     public Produto obterPeloId(int id) {
         String sql = "SELECT * FROM produto WHERE id = ?";
         try (Connection conn = Conexao.getConexao();

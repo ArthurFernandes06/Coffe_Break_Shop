@@ -47,3 +47,19 @@ h3, p{
     justify-content: left;
     
 }
+
+.produto-sem-foto{
+    width: 350px;
+    aspect-ratio: 1 / 1;
+    background: linear-gradient(135deg, #CFC6B7, #7A6543);
+    color: #fffaf2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 8px;
+    padding: 20px;
+    box-sizing: border-box;
+    font-family: var(--fonte-destaque);
+    font-size: 32px;
+}

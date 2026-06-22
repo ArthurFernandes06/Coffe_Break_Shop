@@ -1,5 +1,8 @@
 <%@ page isELIgnored="false" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
+<%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -7,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/views_public/base/style_geral.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/views_public/pagina_produto_unica/style.css">
-    <link rel="shortcut icon" href="${pageContext.request.contextPath}/views_public/imgs/xicara-fav-icon.png" type="image/png">
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/imgs/xicara-fav-icon.png" type="image/png">
     <title>Coffe Break Shop</title>
     <script src="${pageContext.request.contextPath}/views_public/pagina_produto_unica/script.js"></script>
 </head>
@@ -26,23 +29,30 @@
 	        <img class="img_header" src="${pageContext.request.contextPath}/imgs/pagina_inicial/header/user.png" alt="Icone User">
 	    </div>
 	</header>
-	<body>
-		<main class="container-produto">
-			<h1>${produto.nome}</h1>
-			<div class="produto-detalhes">
-				
-				<div class="foto-produto">
-					<img src="${pageContext.request.contextPath}/uploads/${produto.foto}" alt="${produto.nome}" width="350">
-				</div>
+	<main class="container-produto">
+		<h1>${fn:escapeXml(produto.nome)}</h1>
+		<div class="produto-detalhes">
 
-				<div class="informacoes-produto">
-					<h2 class="preco">${produto.preco} R$</h2>
-					<button class="btn-comprar">Adicionar ao Carrinho</button>
-					<h3><u>Descrição: </u></h3>
-					<p class="descricao">${produto.descricao}</p>
-				</div>
-
+			<div class="foto-produto">
+				<c:choose>
+					<c:when test="${not empty produto.foto}">
+						<img src="${pageContext.request.contextPath}/uploads/${fn:escapeXml(produto.foto)}" alt="${fn:escapeXml(produto.nome)}" width="350">
+					</c:when>
+					<c:otherwise>
+						<div class="produto-sem-foto">
+							<span>${fn:escapeXml(produto.nome)}</span>
+						</div>
+					</c:otherwise>
+				</c:choose>
 			</div>
-		</main>
-	</body>
+
+			<div class="informacoes-produto">
+				<h2 class="preco"><fmt:formatNumber value="${produto.preco}" type="currency" currencySymbol="R$" /></h2>
+				<button class="btn-comprar">Adicionar ao Carrinho</button>
+				<h3><u>Descrição: </u></h3>
+				<p class="descricao">${fn:escapeXml(empty produto.descricao ? 'Produto disponível para compra.' : produto.descricao)}</p>
+			</div>
+
+		</div>
+	</main>
 </body>
