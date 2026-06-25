@@ -21,3 +21,7 @@ postgres_data/
 .project
 .classpath
 bin/
+
+#imagens
+diretorio-de-uploads-local/
+

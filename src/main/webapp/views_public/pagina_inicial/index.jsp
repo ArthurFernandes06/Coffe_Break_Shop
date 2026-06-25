@@ -89,7 +89,6 @@
                                     <span class="produto_categoria">${fn:escapeXml(produto.categoria.nome)}</span>
                                 </c:if>
                                 <h3>${fn:escapeXml(produto.nome)}</h3>
-                                <p>${fn:escapeXml(empty produto.descricao ? 'Produto disponível para compra.' : produto.descricao)}</p>
                                 <strong>
                                     <fmt:formatNumber value="${produto.preco}" type="currency" currencySymbol="R$" />
                                 </strong>
@@ -106,6 +105,13 @@
 
         <section id="categorias" class="section_categorias">
             <h2>Categorias</h2>
+            <div class="categorias_lista">
+                <c:forEach var="categoria" items="${categoriasCadastradas}">
+                    <a href="#" class="link_categorias">
+                        ${fn:escapeXml(categoria.nome)}
+                    </a>
+                </c:forEach>
+            </div>
         </section>
         
         

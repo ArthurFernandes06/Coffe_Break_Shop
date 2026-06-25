@@ -182,7 +182,7 @@ section#img_01{
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    box-shadow: inset 5px 5px 10px black;
+    box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.63);
     padding: 1px;
 }
 section#img_01 h2{
@@ -322,9 +322,11 @@ section#img_01 h2{
     background-image: url('../../imgs/pagina_inicial/friends-enjoying-coffee-together.jpg');
     background-size: cover;
     background-position: center;
+    background-attachment: fixed;
+    box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.623);
     color: #fffaf2;
     padding: 70px 24px;
-    box-shadow: inset 0 0 0 1000px rgba(51, 36, 11, 0.62);
+
 }
 
 .section_categorias h2,
@@ -336,9 +338,28 @@ section#img_01 h2{
 
 .section_categorias h2{
     color: #fffaf2;
+    font-size: 36px;
 }
 
 .section_categorias p{
     font-size: 20px;
     line-height: 1.5;
+}
+
+.categorias_lista{
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    padding: 5px;
+}
+
+.link_categorias{
+    background-color: var(--cor2);
+    border-radius: 4px;
+    padding: 10px;
+}
+.link_categorias:hover{
+    background-color: #ebd4af;
+    box-shadow: inset 1px 1px rgba(0, 0, 0, 0.76);
+
 }
