@@ -18,7 +18,7 @@
         <img id="img_logo" src="${pageContext.request.contextPath}/imgs/pagina_inicial/header/xicara-logo.png" alt="Icone logo Coffe Break">
         <nav>
             <a href="#produtos">Produtos</a>
-            <a href="#sobre-nos">Sobre Nós</a>
+            <a href="#categorias">Categorias</a>
 
         </nav>
         <div id="div_imgs_menu">
@@ -104,9 +104,8 @@
             </div>
         </section>
 
-        <section id="sobre-nos" class="section_sobre">
-            <h2>Sobre Nós</h2>
-            <p>Produtos pensados para acompanhar sua pausa no estudo, no trabalho ou no encontro com amigos.</p>
+        <section id="categorias" class="section_categorias">
+            <h2>Categorias</h2>
         </section>
         
         

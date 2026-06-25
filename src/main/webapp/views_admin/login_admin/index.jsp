@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/views_admin/login_admin/style.css">
-    <link rel="shortcut icon" href="${pageContext.request.contextPath}/views_public/imgs/xicara-fav-icon.png" type="image/png">
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/imgs/xicara-fav-icon.png" type="image/png">
     <title>Coffee Break — Acesso Admin</title>
 </head>
 <body>
@@ -14,7 +14,7 @@
     <header class="header-admin">
         <div class="logo-container">
             <a href="${pageContext.request.contextPath}/views_public/pagina_inicial/index.html">
-                <img id="img_logo" src="${pageContext.request.contextPath}/views_public/imgs/pagina_inicial/header/xicara-logo.png" alt="Logo Coffee Break">
+                <img id="img_logo" src="${pageContext.request.contextPath}/imgs/pagina_inicial/header/xicara-logo.png" alt="Logo Coffee Break">
             </a>
             <span class="admin-badge">PORTAL ADMINISTRATIVO</span>
         </div>
