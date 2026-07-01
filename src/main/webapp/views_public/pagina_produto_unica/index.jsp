@@ -25,8 +25,8 @@
 
 	    </nav>
 	    <div id="div_imgs_menu">
-	        <img class="img_header" src="${pageContext.request.contextPath}/imgs/pagina_inicial/header/carrinho.png" alt="Icone da Sacola">
-	        <img class="img_header" src="${pageContext.request.contextPath}/imgs/pagina_inicial/header/user.png" alt="Icone User">
+	        <a href="${pageContext.request.contextPath}/carrinho"><img class="img_header" src="${pageContext.request.contextPath}/imgs/pagina_inicial/header/carrinho.png" alt="Icone da Sacola"></a>
+	        <a href="${pageContext.request.contextPath}${not empty sessionScope.usuarioLogado ? '/usuario' : '/login'}"><img class="img_header" src="${pageContext.request.contextPath}/imgs/pagina_inicial/header/user.png" alt="Icone User"></a>
 	    </div>
 	</header>
 	<main class="container-produto">
@@ -48,7 +48,12 @@
 
 			<div class="informacoes-produto">
 				<h2 class="preco"><fmt:formatNumber value="${produto.preco}" type="currency" currencySymbol="R$" /></h2>
-				<button class="btn-comprar">Adicionar ao Carrinho</button>
+				<form class="form-comprar" action="${pageContext.request.contextPath}/carrinho/adicionar" method="post">
+					<input type="hidden" name="produto_id" value="${produto.id}">
+					<label for="quantidade">Quantidade</label>
+					<input type="number" id="quantidade" name="quantidade" value="1" min="1" max="${produto.quantidade}" required>
+					<button type="submit" class="btn-comprar">Adicionar ao Carrinho</button>
+				</form>
 				<h3><u>Descrição: </u></h3>
 				<p class="descricao">${fn:escapeXml(empty produto.descricao ? 'Produto disponível para compra.' : produto.descricao)}</p>
 			</div>

@@ -11,8 +11,8 @@ function mostrarSecao(id) {
     if (linkAtivo) linkAtivo.classList.add("active")
 }
 
-// Abre "perfil" por padrão
-mostrarSecao("perfil")
+// Abre a seção indicada pelo servlet ou "perfil" por padrão
+mostrarSecao(window.activeSection || "perfil")
 
 links.forEach(link => {
     link.addEventListener("click", (e) => {
@@ -67,43 +67,6 @@ btnSave.forEach(btn => {
         camposEditados.add(campo)
         document.getElementById("btn-atualizar-dados").style.display = "inline-block"
     })
-})
-
-// ── Pedidos ─────────────────────────────────────────────────────
-const pedidos = [
-    { produto: "Café Especial", data: "10/04/2025", status: "entregue", valor: 49.90 },
-    { produto: "Xícara",        data: "05/04/2025", status: "enviado",  valor: 29.90 }
-]
-document.getElementById("total-pedidos").textContent = pedidos.length
-document.getElementById("ultimo-pedido").textContent = pedidos[pedidos.length - 1].produto
-
-const tbody = document.getElementById("historico-pedidos")
-pedidos.forEach(p => {
-    const tr = document.createElement("tr")
-    tr.innerHTML = `<td>${p.produto}</td><td>${p.data}</td><td>${p.status}</td><td>R$ ${p.valor.toFixed(2)}</td>`
-    tbody.appendChild(tr)
-})
-
-// ── Carrinho ────────────────────────────────────────────────────
-const carrinho = [
-    { produto: "Café",    valor: 2.00  },
-    { produto: "Coxinha", valor: 15.90 }
-]
-let precoTotalVal = 0
-const precoTotalEl   = document.getElementById("preco-total")
-const itensCarrinhoEl = document.getElementById("itens-carrinho")
-
-carrinho.forEach(item => {
-    const p = document.createElement("p")
-    p.textContent = `Produto: ${item.produto} | Preço: R$ ${item.valor.toFixed(2)}`
-    itensCarrinhoEl.appendChild(p)
-    precoTotalVal += item.valor
-})
-precoTotalEl.textContent = `Preço total: R$ ${precoTotalVal.toFixed(2)}`
-
-document.getElementById("btn-finalizar").addEventListener("click", () => {
-    precoTotalEl.textContent = "Preço total: R$ 0,00"
-    itensCarrinhoEl.innerHTML = "Carrinho vazio..."
 })
 
 // ── Modal excluir conta ─────────────────────────────────────────

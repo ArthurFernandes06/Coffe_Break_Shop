@@ -1,8 +1,6 @@
 /**
  * admin_script.js
- * Navegação entre páginas, filtros de tabela e ações simuladas.
- *
- * Para integrar com backend, substitua os alert() por chamadas fetch().
+ * Navegação entre páginas e filtros de tabela.
  */
 
 /* ─── Troca de página ─── */
@@ -35,17 +33,9 @@ function filtrar(inputId, tabelaId, coluna) {
 function filtrarStatus() {
     const val = document.getElementById('filtro-status').value;
     document.querySelectorAll('#tb-pedidos tbody tr').forEach(tr => {
-        const status = tr.cells[3] ? tr.cells[3].textContent : '';
+        const status = tr.cells[4] ? tr.cells[4].textContent : '';
         tr.style.display = (!val || status.includes(val)) ? '' : 'none';
     });
-}
-
-/* ─── Confirmar pedido ─── */
-function confirmar(btn) {
-    const row = btn.closest('tr');
-    row.cells[3].innerHTML = '<span class="badge ok">Entregue</span>';
-    row.cells[4].textContent = '—';
-    // TODO: fetch('/api/pedidos/confirmar', { method: 'PATCH', ... })
 }
 
 /* ─── Formulário de produto: abrir em modo "novo" ─── */

@@ -28,8 +28,8 @@ create table venda (
     id_usuario int references usuario(id) on delete cascade,
     data_hora timestamptz default current_timestamp,
     valor_total decimal(10,2),
-    status_pedido varchar(30) default 'pendente',
-    constraint chk_status_venda check (status_pedido in ('pendente', 'pago', 'enviado', 'cancelado'))
+    status varchar(30) default 'PENDENTE',
+    constraint chk_status_venda check (status in ('PENDENTE', 'PAGO', 'ENVIADO', 'CANCELADO'))
 );
 
 create table venda_produto (
@@ -45,7 +45,7 @@ create table carrinho (
     id_usuario int references usuario(id) on delete cascade,
     status varchar(10),
     data_criacao timestamptz default current_timestamp,
-    constraint chk_status_carrinho check (status in ('ativo', 'inativo', 'abandonado'))
+    constraint chk_status_carrinho check (status in ('ATIVO', 'INATIVO', 'ABANDONADO'))
 );
 
 create table carrinho_produto (

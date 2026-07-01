@@ -127,7 +127,8 @@ aside nav a.active {
 }
 input[type="text"],
 input[type="email"],
-input[type="password"] {
+input[type="password"],
+input[type="number"] {
     background-color: var(--cor5);
     border: 1px solid var(--cor1);
     border-radius: 6px;
@@ -268,3 +269,133 @@ td {
     margin-top: 12px;
 }
 #btn-finalizar:hover { background-color: var(--cor1); }
+
+.carrinho-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.carrinho-item {
+    display: grid;
+    grid-template-columns: minmax(220px, 1fr) auto auto;
+    gap: 16px;
+    align-items: center;
+    border-bottom: 1px solid var(--cor1);
+    padding-bottom: 12px;
+}
+
+.carrinho-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.carrinho-produto {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.carrinho-produto img,
+.carrinho-sem-foto {
+    width: 72px;
+    height: 72px;
+    border-radius: 8px;
+    object-fit: cover;
+    background-color: var(--cor5);
+    border: 1px solid var(--cor1);
+    flex-shrink: 0;
+}
+
+.carrinho-sem-foto {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--cor2);
+    font-size: 12px;
+    text-align: center;
+    padding: 4px;
+    box-sizing: border-box;
+}
+
+.carrinho-produto h3 {
+    margin: 0 0 6px;
+    color: var(--cor2);
+}
+
+.carrinho-produto p {
+    margin: 0;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.carrinho-acoes {
+    display: flex;
+    align-items: end;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.carrinho-acoes form {
+    display: flex;
+    align-items: end;
+    gap: 8px;
+}
+
+.carrinho-acoes input[type="number"] {
+    width: 78px;
+    margin: 0;
+}
+
+.btn-carrinho,
+.btn-remover-carrinho {
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    padding: 8px 14px;
+    font-size: 14px;
+}
+
+.btn-carrinho {
+    background-color: var(--cor1);
+    color: var(--cor5);
+}
+
+.btn-carrinho:hover {
+    background-color: var(--cor2);
+}
+
+.btn-remover-carrinho {
+    background-color: #8b2020;
+    color: #ffd0d0;
+}
+
+.btn-remover-carrinho:hover {
+    background-color: #b03030;
+}
+
+#preco-total {
+    margin-top: 18px;
+    font-size: 18px;
+}
+
+@media (max-width: 860px) {
+    main {
+        flex-direction: column;
+    }
+
+    aside {
+        width: 100%;
+    }
+
+    aside nav {
+        flex-direction: row;
+        overflow-x: auto;
+    }
+
+    .carrinho-item {
+        grid-template-columns: 1fr;
+        align-items: stretch;
+    }
+}

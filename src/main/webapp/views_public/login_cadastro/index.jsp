@@ -6,25 +6,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/views_public/login_cadastro/style.css">
-    <link rel="shortcut icon" href="${pageContext.request.contextPath}/views_public/imgs/xicara-fav-icon.png" type="image/png">
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/imgs/xicara-fav-icon.png" type="image/png">
     <title>Coffe Break Shop — Entrar / Cadastrar</title>
 </head>
 <body>
 
     <!-- HEADER -->
     <header>
-        <a href="../pagina_inicial/index.html">
-            <img id="img_logo" src="${pageContext.request.contextPath}/views_public/imgs/pagina_inicial/header/xicara-logo.png" alt="Icone logo Coffe Break">
+        <a href="${pageContext.request.contextPath}/home">
+            <img id="img_logo" src="${pageContext.request.contextPath}/imgs/pagina_inicial/header/xicara-logo.png" alt="Icone logo Coffe Break">
         </a>
         <nav>
-            <a href="../pagina_inicial/index.html#produtos">Produtos</a>
-            <a href="../pagina_inicial/index.html#categorias">Categorias</a>
-            <a href="../pagina_inicial/index.html#ofertas">Ofertas</a>
-            <a href="../pagina_inicial/index.html#sobre">Sobre Nós</a>
+            <a href="${pageContext.request.contextPath}/home#produtos">Produtos</a>
+            <a href="${pageContext.request.contextPath}/home#categorias">Categorias</a>
+            <a href="${pageContext.request.contextPath}/home#ofertas">Ofertas</a>
+            <a href="${pageContext.request.contextPath}/home#sobre">Sobre Nós</a>
         </nav>
         <div id="div_imgs_menu">
-            <img class="img_header" src="${pageContext.request.contextPath}/views_public/imgs/pagina_inicial/header/carrinho.png" alt="Icone da Sacola">
-            <img class="img_header" src="${pageContext.request.contextPath}/views_public/imgs/pagina_inicial/header/user.png" alt="Icone User">
+            <a href="${pageContext.request.contextPath}/carrinho"><img class="img_header" src="${pageContext.request.contextPath}/imgs/pagina_inicial/header/carrinho.png" alt="Icone da Sacola"></a>
+            <a href="${pageContext.request.contextPath}${not empty sessionScope.usuarioLogado ? '/usuario' : '/login'}"><img class="img_header" src="${pageContext.request.contextPath}/imgs/pagina_inicial/header/user.png" alt="Icone User"></a>
         </div>
     </header>
 
@@ -37,7 +37,7 @@
 
                 <!-- Logo / título do card -->
                 <div id="card-logo">
-                    <img src="${pageContext.request.contextPath}/views_public/imgs/pagina_inicial/header/xicara-logo.png" alt="Logo Coffe Break">
+                    <img src="${pageContext.request.contextPath}/imgs/pagina_inicial/header/xicara-logo.png" alt="Logo Coffe Break">
                     <h1>Coffe Break Shop</h1>
                 </div>
 

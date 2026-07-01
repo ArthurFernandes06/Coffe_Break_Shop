@@ -309,6 +309,26 @@ section#img_01 h2{
     margin-top: 8px;
 }
 
+.produto_carrinho_form{
+    padding: 0 16px 16px;
+}
+
+.produto_carrinho_form button{
+    width: 100%;
+    background-color: var(--cor3);
+    color: var(--cor2);
+    border: none;
+    border-radius: 6px;
+    padding: 10px;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.produto_carrinho_form button:hover{
+    background-color: var(--cor1);
+    color: var(--cor5);
+}
+
 .sem_produtos{
     color: var(--cor4);
     background-color: #fffaf2;

@@ -22,8 +22,8 @@
 
         </nav>
         <div id="div_imgs_menu">
-            <img class="img_header" src="${pageContext.request.contextPath}/imgs/pagina_inicial/header/carrinho.png" alt="Icone da Sacola">
-            <img class="img_header" src="${pageContext.request.contextPath}/imgs/pagina_inicial/header/user.png" alt="Icone User">
+            <a href="${pageContext.request.contextPath}/carrinho"><img class="img_header" src="${pageContext.request.contextPath}/imgs/pagina_inicial/header/carrinho.png" alt="Icone da Sacola"></a>
+            <a href="${pageContext.request.contextPath}${not empty sessionScope.usuarioLogado ? '/usuario' : '/login'}"><img class="img_header" src="${pageContext.request.contextPath}/imgs/pagina_inicial/header/user.png" alt="Icone User"></a>
         </div>
     </header>
     <main>
@@ -94,6 +94,11 @@
                                 </strong>
                             </div>
                         </a>
+                        <form class="produto_carrinho_form" action="${pageContext.request.contextPath}/carrinho/adicionar" method="post">
+                            <input type="hidden" name="produto_id" value="${produto.id}">
+                            <input type="hidden" name="quantidade" value="1">
+                            <button type="submit">Adicionar ao carrinho</button>
+                        </form>
                     </article>
                 </c:forEach>
 

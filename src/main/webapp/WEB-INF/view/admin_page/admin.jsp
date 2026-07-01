@@ -46,6 +46,12 @@
         <c:if test="${param.erro == 'remocao'}">
             <div class="alert alert-error">Não foi possível remover a conta. Tente novamente.</div>
         </c:if>
+        <c:if test="${not empty param.sucesso && param.sucesso != 'dadosAtualizados'}">
+            <div class="alert alert-success">${fn:escapeXml(param.sucesso)}</div>
+        </c:if>
+        <c:if test="${not empty param.erro && param.erro != 'emailInvalido' && param.erro != 'atualizacao' && param.erro != 'remocao'}">
+            <div class="alert alert-error">${fn:escapeXml(param.erro)}</div>
+        </c:if>
 
         <section id="page-dashboard" class="page active">
             <h2>Dashboard</h2>
@@ -79,7 +85,7 @@
                             <tr>
                                 <td>${v.usuario.nome}</td>
                                 <td><fmt:formatNumber value="${v.valorTotal}" type="currency" currencySymbol="R$" /></td>
-                                <td><span class="badge ${v.status == 'Entregue' ? 'ok' : (v.status == 'Pendente' ? 'pend' : 'cancel')}">${v.status}</span></td>
+                                <td><span class="badge ${v.status == 'PAGO' || v.status == 'ENVIADO' ? 'ok' : (v.status == 'PENDENTE' ? 'pend' : 'cancel')}">${v.status}</span></td>
                             </tr>
                         </c:forEach>
                     </tbody>
@@ -287,18 +293,44 @@
             <div class="table-box">
                 <table id="tb-pedidos">
                     <thead>
-                        <tr><th>ID</th><th>Cliente</th><th>Total</th><th>Status</th><th>Ação</th></tr>
+                        <tr><th>ID</th><th>Cliente</th><th>Produtos</th><th>Total</th><th>Status</th><th>Ações</th></tr>
                     </thead>
                     <tbody>
                         <c:forEach var="v" items="${todasVendas}">
                             <tr>
                                 <td>#${v.id}</td>
                                 <td>${v.usuario.nome}</td>
+                                <td>
+                                    <c:forEach var="itemVenda" items="${produtosPorVenda[v.id]}" varStatus="loop">
+                                        ${fn:escapeXml(itemVenda.produto.nome)} (${itemVenda.quantidade})<c:if test="${not loop.last}">, </c:if>
+                                    </c:forEach>
+                                </td>
                                 <td><fmt:formatNumber value="${v.valorTotal}" type="currency" currencySymbol="R$" /></td>
-                                <td><span class="badge ${v.status == 'Entregue' ? 'ok' : 'pend'}">${v.status}</span></td>
-                                <td><button class="btn-sm" onclick="confirmar(this)">Confirmar</button></td>
+                                <td><span class="badge ${v.status == 'PAGO' || v.status == 'ENVIADO' ? 'ok' : 'pend'}">${v.status}</span></td>
+                                <td>
+                                    <div class="acoes-cell">
+                                        <form method="POST" action="${pageContext.request.contextPath}/admin/venda/atualizar-status">
+                                            <input type="hidden" name="id" value="${v.id}">
+                                            <input type="hidden" name="status" value="PAGO">
+                                            <button class="btn-sm" type="submit">Confirmar</button>
+                                        </form>
+                                        <form method="POST" action="${pageContext.request.contextPath}/admin/venda/atualizar-status">
+                                            <input type="hidden" name="id" value="${v.id}">
+                                            <input type="hidden" name="status" value="ENVIADO">
+                                            <button class="btn-sm" type="submit">Enviar</button>
+                                        </form>
+                                        <form method="POST" action="${pageContext.request.contextPath}/admin/venda/remover"
+                                              onsubmit="return confirm('Tem certeza que deseja remover este pedido?');">
+                                            <input type="hidden" name="id" value="${v.id}">
+                                            <button class="btn-sm btn-danger" type="submit">Excluir</button>
+                                        </form>
+                                    </div>
+                                </td>
                             </tr>
                         </c:forEach>
+                        <c:if test="${empty todasVendas}">
+                            <tr><td colspan="6">Nenhum pedido cadastrado ainda.</td></tr>
+                        </c:if>
                     </tbody>
                 </table>
             </div>

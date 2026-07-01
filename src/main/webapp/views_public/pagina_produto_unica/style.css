@@ -16,7 +16,7 @@ main.container-produto{
 
 .btn-comprar{
     background-color: rgb(153, 255, 153);
-    height: 80px;
+    min-height: 58px;
     width: 160px;
     border-style: solid;
     border-color: rgb(119, 190, 119);
@@ -25,6 +25,7 @@ main.container-produto{
     font-weight: bolder;
     margin: auto;
     padding: 10px;
+    cursor: pointer;
 }
 
 .btn-comprar:Hover{
@@ -41,6 +42,26 @@ h3, p{
     justify-content: center;
     margin-left:30px;
     padding: 20px;
+}
+
+.form-comprar{
+    display: grid;
+    justify-items: center;
+    gap: 10px;
+}
+
+.form-comprar label{
+    color: #CFC6B7;
+    font-weight: bold;
+}
+
+.form-comprar input[type="number"]{
+    width: 90px;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #A59376;
+    background-color: #33240B;
+    color: #CFC6B7;
 }
 .produto-detalhes{
     display: flex;

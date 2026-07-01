@@ -8,6 +8,8 @@ import com.coffeebreak.models.Usuario.Usuario;
 import com.coffeebreak.models.Usuario.UsuarioDAO;
 import com.coffeebreak.models.Venda.Venda;
 import com.coffeebreak.models.Venda.VendaDAO;
+import com.coffeebreak.models.vendaproduto.VendaProduto;
+import com.coffeebreak.models.vendaproduto.VendaProdutoDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -16,7 +18,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @WebServlet("/admin/dashboard")
 public class DashboardServlet extends HttpServlet {
@@ -29,6 +33,7 @@ public class DashboardServlet extends HttpServlet {
             return;
         }
         VendaDAO vendaDAO = new VendaDAO();
+        VendaProdutoDAO vendaProdutoDAO = new VendaProdutoDAO();
         ProdutoDAO produtoDAO = new ProdutoDAO();
         UsuarioDAO usuarioDAO = new UsuarioDAO();
 
@@ -43,11 +48,17 @@ public class DashboardServlet extends HttpServlet {
         List<Categoria> categorias = categoriaDAO.obterTodos();
         List<Usuario> usuarios = usuarioDAO.obterTodos();
         List<Venda> todasVendas = vendaDAO.obterTodas();
+        Map<Integer, List<VendaProduto>> produtosPorVenda = new HashMap<>();
+
+        for (Venda venda : todasVendas) {
+            produtosPorVenda.put(venda.getId(), vendaProdutoDAO.obterProdutosPorVenda(venda.getId()));
+        }
 
         request.setAttribute("produtos", produtos);
         request.setAttribute("categorias", categorias);
         request.setAttribute("usuarios", usuarios);
         request.setAttribute("todasVendas", todasVendas);
+        request.setAttribute("produtosPorVenda", produtosPorVenda);
 
         request.getRequestDispatcher("/WEB-INF/view/admin_page/admin.jsp").forward(request, response);
     }

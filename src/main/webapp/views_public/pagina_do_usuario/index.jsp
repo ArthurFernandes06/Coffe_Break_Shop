@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.coffeebreak.models.Usuario.Usuario" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
+<%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
 <%
     HttpSession sessaoAtual = request.getSession(false);
     Usuario usuarioLogado = (sessaoAtual != null) ? (Usuario) sessaoAtual.getAttribute("usuarioLogado") : null;
@@ -9,6 +12,10 @@
     }
     String erro = (String) request.getAttribute("erro");
     String sucesso = (String) request.getAttribute("sucesso");
+    String activeSection = (String) request.getAttribute("activeSection");
+    if (activeSection == null || activeSection.isBlank()) {
+        activeSection = "perfil";
+    }
 %>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -21,18 +28,18 @@
 <body>
 
 <header>
+    <img id="img_logo" src="${pageContext.request.contextPath}/imgs/pagina_inicial/header/xicara-logo.png" alt="Logo">
     <nav>
-        <img id="img_logo" src="${pageContext.request.contextPath}/views_public/imgs/pagina_inicial/header/xicara-logo.png" alt="Logo">
-        <a href="#">Início</a>
-        <a href="#">Cardápio</a>
+        <a href="${pageContext.request.contextPath}/home">Início</a>
+        <a href="${pageContext.request.contextPath}/home#produtos">Cardápio</a>
         <a href="#">Sobre</a>
     </nav>
     <div id="div_imgs_menu">
         <a href="${pageContext.request.contextPath}/carrinho">
-            <img class="img_header" src="${pageContext.request.contextPath}/views_public/imgs/pagina_inicial/header/carrinho.png" alt="Carrinho">
+            <img class="img_header" src="${pageContext.request.contextPath}/imgs/pagina_inicial/header/carrinho.png" alt="Carrinho">
         </a>
         <a href="${pageContext.request.contextPath}/usuario">
-            <img class="img_header" src="${pageContext.request.contextPath}/views_public/imgs/pagina_inicial/header/user.png" alt="Usuário">
+            <img class="img_header" src="${pageContext.request.contextPath}/imgs/pagina_inicial/header/user.png" alt="Usuário">
         </a>
     </div>
 </header>
@@ -41,8 +48,8 @@
     <aside>
         <nav>
             <a href="#" class="nav-link" data-section="perfil">👤 Meu Perfil</a>
-            <a href="#" class="nav-link" data-section="pedidos">📦 Pedidos</a>
-            <a href="#" class="nav-link" data-section="carrinho">🛒 Carrinho</a>
+            <a href="${pageContext.request.contextPath}/usuario?secao=pedidos" class="nav-link" data-section="pedidos">📦 Pedidos</a>
+            <a href="${pageContext.request.contextPath}/carrinho" class="nav-link <%= "carrinho".equals(activeSection) ? "active" : "" %>">🛒 Carrinho</a>
             <a href="#" class="nav-link" data-section="configuracoes">⚙️ Configurações</a>
             <a href="${pageContext.request.contextPath}/logoff" class="nav-link sair-link">🚪 Sair</a>
         </nav>
@@ -120,31 +127,132 @@
         <!-- ===== PEDIDOS ===== -->
         <section class="pagina" id="pedidos">
             <h2>Meus Pedidos</h2>
+
+            <c:if test="${not empty param.sucesso}">
+                <div class="alerta alerta-sucesso">${fn:escapeXml(param.sucesso)}</div>
+            </c:if>
+            <c:if test="${not empty param.erro}">
+                <div class="alerta alerta-erro">${fn:escapeXml(param.erro)}</div>
+            </c:if>
+
             <div class="card">
-                <h3>Total de pedidos: <span id="total-pedidos">0</span></h3>
-                <h3>Último pedido: <span id="ultimo-pedido">–</span></h3>
+                <h3>Total de pedidos: <span id="total-pedidos">${fn:length(vendasUsuario)}</span></h3>
+                <h3>
+                    Último pedido:
+                    <span id="ultimo-pedido">
+                        <c:choose>
+                            <c:when test="${not empty vendasUsuario}">
+                                #${vendasUsuario[0].id}
+                            </c:when>
+                            <c:otherwise>-</c:otherwise>
+                        </c:choose>
+                    </span>
+                </h3>
             </div>
             <table>
                 <thead>
                     <tr>
-                        <th>Produto</th>
+                        <th>Pedido</th>
+                        <th>Produtos</th>
                         <th>Data</th>
                         <th>Status</th>
                         <th>Valor</th>
                     </tr>
                 </thead>
-                <tbody id="historico-pedidos"></tbody>
+                <tbody id="historico-pedidos">
+                    <c:forEach var="venda" items="${vendasUsuario}">
+                        <tr>
+                            <td>#${venda.id}</td>
+                            <td>
+                                <c:forEach var="itemVenda" items="${produtosPorVenda[venda.id]}" varStatus="loop">
+                                    ${fn:escapeXml(itemVenda.produto.nome)} (${itemVenda.quantidade})<c:if test="${not loop.last}">, </c:if>
+                                </c:forEach>
+                            </td>
+                            <td><fmt:formatDate value="${venda.dataHora}" pattern="dd/MM/yyyy HH:mm" /></td>
+                            <td>${fn:escapeXml(venda.status)}</td>
+                            <td>R$ <fmt:formatNumber value="${venda.valorTotal}" pattern="0.00" /></td>
+                        </tr>
+                    </c:forEach>
+                    <c:if test="${empty vendasUsuario}">
+                        <tr><td colspan="5">Nenhum pedido realizado ainda.</td></tr>
+                    </c:if>
+                </tbody>
             </table>
         </section>
 
         <!-- ===== CARRINHO ===== -->
         <section class="pagina" id="carrinho">
             <h2>Meu Carrinho</h2>
+
+            <c:if test="${not empty param.sucesso}">
+                <div class="alerta alerta-sucesso">${fn:escapeXml(param.sucesso)}</div>
+            </c:if>
+            <c:if test="${not empty param.erro}">
+                <div class="alerta alerta-erro">${fn:escapeXml(param.erro)}</div>
+            </c:if>
+
             <div class="card">
-                <div id="itens-carrinho"></div>
-                <p id="preco-total">Preço total: R$ 0,00</p>
+                <c:choose>
+                    <c:when test="${not empty itensCarrinho}">
+                        <div class="carrinho-lista">
+                            <c:forEach var="item" items="${itensCarrinho}">
+                                <div class="carrinho-item">
+                                    <div class="carrinho-produto">
+                                        <c:choose>
+                                            <c:when test="${not empty item.produto.foto}">
+                                                <img src="${pageContext.request.contextPath}/uploads/${fn:escapeXml(item.produto.foto)}" alt="${fn:escapeXml(item.produto.nome)}">
+                                            </c:when>
+                                            <c:otherwise>
+                                                <div class="carrinho-sem-foto">${fn:escapeXml(item.produto.nome)}</div>
+                                            </c:otherwise>
+                                        </c:choose>
+                                        <div>
+                                            <h3>${fn:escapeXml(item.produto.nome)}</h3>
+                                            <p>
+                                                R$ <fmt:formatNumber value="${item.produto.preco}" pattern="0.00" />
+                                                <span>Estoque: ${item.produto.quantidade}</span>
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div class="carrinho-acoes">
+                                        <form action="${pageContext.request.contextPath}/carrinho/atualizar" method="post">
+                                            <input type="hidden" name="produto_id" value="${item.produto.id}">
+                                            <label for="qtd-${item.produto.id}">Quantidade</label>
+                                            <input type="number" id="qtd-${item.produto.id}" name="quantidade"
+                                                   value="${item.quantidade}" min="1" max="${item.produto.quantidade}" required>
+                                            <button type="submit" class="btn-carrinho">Atualizar</button>
+                                        </form>
+
+                                        <form action="${pageContext.request.contextPath}/carrinho/remover" method="post">
+                                            <input type="hidden" name="produto_id" value="${item.produto.id}">
+                                            <button type="submit" class="btn-remover-carrinho">Remover</button>
+                                        </form>
+                                    </div>
+
+                                    <strong>
+                                        R$ <fmt:formatNumber value="${item.produto.preco * item.quantidade}" pattern="0.00" />
+                                    </strong>
+                                </div>
+                            </c:forEach>
+                        </div>
+
+                        <p id="preco-total">
+                            Preço total:
+                            <strong>R$ <fmt:formatNumber value="${totalCarrinho}" pattern="0.00" /></strong>
+                        </p>
+                    </c:when>
+                    <c:otherwise>
+                        <p>Carrinho vazio.</p>
+                    </c:otherwise>
+                </c:choose>
             </div>
-            <button id="btn-finalizar">Finalizar Compra</button>
+
+            <c:if test="${not empty itensCarrinho}">
+                <form action="${pageContext.request.contextPath}/compra/finalizar" method="post">
+                    <button id="btn-finalizar" type="submit">Finalizar Compra</button>
+                </form>
+            </c:if>
         </section>
 
         <!-- ===== CONFIGURAÇÕES ===== -->
@@ -175,6 +283,9 @@
     </div>
 </div>
 
+<script>
+    window.activeSection = "<%= activeSection %>";
+</script>
 <script src="${pageContext.request.contextPath}/views_public/pagina_do_usuario/script.js"></script>
 </body>
 </html>

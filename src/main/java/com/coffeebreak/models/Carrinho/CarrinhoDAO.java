@@ -29,6 +29,22 @@ public class CarrinhoDAO {
         return false;
     }
 
+    public Carrinho criarCarrinhoERetornar(Carrinho carrinho) {
+        String sql = "INSERT INTO carrinho(id_usuario, status) VALUES(?,?) RETURNING *";
+        try (Connection conn = Conexao.getConexao();
+            PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, carrinho.getUsuario().getId());
+            ps.setString(2, carrinho.getStatus());
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) return mapearCarrinho(rs);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
     public Carrinho obterPeloId(int id) {
         String sql = "SELECT * FROM carrinho WHERE id = ?";
         try (Connection conn = Conexao.getConexao();
@@ -44,7 +60,7 @@ public class CarrinhoDAO {
     }
 
     public Carrinho obterCarrinhoAtivo(int idUsuario) {
-        String sql = "SELECT * FROM carrinho WHERE id_usuario = ? AND status = 'ATIVO'";
+        String sql = "SELECT * FROM carrinho WHERE id_usuario = ? AND status = 'ATIVO' ORDER BY data_criacao DESC LIMIT 1";
 
         try (Connection conn = Conexao.getConexao();
             PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -57,6 +73,14 @@ public class CarrinhoDAO {
                 ex.printStackTrace();
             }
         return null;
+    }
+
+    public Carrinho obterOuCriarCarrinhoAtivo(Usuario usuario) {
+        Carrinho carrinho = obterCarrinhoAtivo(usuario.getId());
+        if (carrinho != null) {
+            return carrinho;
+        }
+        return criarCarrinhoERetornar(new Carrinho("ATIVO", usuario));
     }
 
     public List<Carrinho> obterPorStatus(String status) {
